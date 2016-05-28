@@ -1,0 +1,21 @@
+{
+  "name": "zawody",
+  "version": "0.0.1",
+  "description": "Aplikacja służąca do obsługi zawodów konnych",
+  "main": "",
+  "authors": [
+    "Marcin Kozina"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/mkozina/zawody",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.4"
+  }
+}

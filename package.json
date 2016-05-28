@@ -1,0 +1,21 @@
+{
+	"name": "zawody",
+	"version": "0.0.1",
+	"description": "Aplikacja służąca do obsługi zawodów konnych",
+	"main": "serwer.js",
+	"scripts": {
+		"start": "node serwer.js",
+		"fetch": "bower install"
+	},
+	"author": "Marcin Kozina",
+	"license": "MIT",
+	"dependencies": {
+		"mongoose": "^4.4.19",
+		"async": "^1.5.2",
+		"socket.io": "^1.4.6",
+		"express": "^4.13.4"
+	},
+	"devDependencies": {
+		"bower": "^1.7.9"
+	}
+}
