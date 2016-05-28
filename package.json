@@ -10,10 +10,16 @@
 	"author": "Marcin Kozina",
 	"license": "MIT",
 	"dependencies": {
+		"mongodb": "^2.1.20",
 		"mongoose": "^4.4.19",
 		"async": "^1.5.2",
 		"socket.io": "^1.4.6",
-		"express": "^4.13.4"
+		"express": "^4.13.4",
+		"passport": "^0.3.2",
+		"passport-local": "^1.0.0",
+		"passport-local-mongoose": "^4.0.0",
+		"passport.socketio": "^3.6.1",
+		"ejs": "^2.4.2"
 	},
 	"devDependencies": {
 		"bower": "^1.7.9"

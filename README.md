@@ -1,6 +1,6 @@
 # Aplikacja 'zawody konne'
 
-# Sposób użycia
+## Sposób użycia
 
 Instalacja zależności:
 npm install
