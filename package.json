@@ -4,7 +4,7 @@
 	"description": "Aplikacja służąca do obsługi zawodów konnych",
 	"main": "serwer.js",
 	"scripts": {
-		"start": "node serwer.js",
+		"start": "node app.js",
 		"fetch": "bower install"
 	},
 	"author": "Marcin Kozina",
