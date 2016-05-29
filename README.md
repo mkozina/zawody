@@ -2,12 +2,12 @@
 
 ## Sposób użycia
 
-Instalacja zależności:
-npm install
+Instalacja zależności:  
+npm install  
 npm run fetch
 
-Uruchomienie serwera:
+Uruchomienie serwera:  
 npm start
 
-Adres:
+Adres:  
 [http://localhost:3000/](http://localhost:3000/)
