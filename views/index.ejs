@@ -1,5 +1,6 @@
 <% if (!user) { %>
 	<a href="/login">Zaloguj</a>
+	<a href="/register">Zarejestruj</a>
 <% } %>
 <% if (user) { %>
 	<p>Jesteś aktualnie zalogowany jako <%= user.username %></p>

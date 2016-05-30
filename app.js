@@ -58,6 +58,9 @@ mongoose.connect('mongodb://localhost/zawody');
 let routes = require('./routes');
 
 app.get('/', routes.index);
+app.get('/register', routes.register);
+app.get('/login', routes.login);
+app.get('/logout', routes.logout);
 
 let server = http.createServer(app);
 
