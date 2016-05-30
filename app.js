@@ -61,6 +61,8 @@ app.get('/', routes.index);
 app.get('/register', routes.register);
 app.get('/login', routes.login);
 app.get('/logout', routes.logout);
+app.post('/register', routes.registerPost);
+app.post('/login', passport.authenticate('local'), routes.loginPost);
 
 let server = http.createServer(app);
 
