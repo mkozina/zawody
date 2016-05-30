@@ -9,6 +9,7 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 var express = require('express');
 var session = require('express-session');
+var expressLayouts = require('express-ejs-layouts');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
@@ -21,6 +22,9 @@ var sessionSecret = 'kociSekrecik23';
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
+app.set('layout', 'layout');
+
+app.use(expressLayouts);
 
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(bodyParser.urlencoded({ extended: false }));

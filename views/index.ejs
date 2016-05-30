@@ -1,0 +1,9 @@
+<% if (!user) { %>
+	<a href="/login">Zaloguj</a>
+<% } %>
+<% if (user) { %>
+	<p>Jesteś aktualnie zalogowany jako <%= user.username %></p>
+	<a href="/logout">Wyloguj</a>
+<% } %>
+
+
