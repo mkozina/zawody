@@ -1,6 +1,5 @@
 "use strict";
 
-var http = require('http');
 var path = require('path');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
@@ -14,6 +13,13 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
 var app = express();
+
+var fs = require('fs');
+var https = require('https');
+var server = https.createServer({
+	key: fs.readFileSync('./ssl/my.key'),
+	cert: fs.readFileSync('./ssl/my.crt')
+}, app);
 
 var port = process.env.PORT || 3000;
 var env = process.env.NODE_ENV || 'development';
@@ -63,8 +69,6 @@ app.get('/login', routes.login);
 app.get('/logout', routes.logout);
 app.post('/register', routes.registerPost);
 app.post('/login', passport.authenticate('local'), routes.loginPost);
-
-let server = http.createServer(app);
 
 server.listen(port, function () {
 	console.log('Serwer pod adresem http://localhost:' + port + '/');
