@@ -6,8 +6,8 @@ exports.index = function (req, res) {
 	res.render('index', { user : req.user });
 };
 
-exports.register = function (req, res) {
-	res.render('register', { });
+exports.cref = function (req, res) {
+	res.render('cref', { });
 };
 
 exports.login = function (req, res) {
@@ -19,11 +19,11 @@ exports.logout = function (req, res) {
 	res.redirect('/');
 };
 
-exports.registerPost = function(req, res) {
+exports.crefPost = function(req, res) {
 	Account.register(new Account({ username : req.body.username, type: req.body.type }), req.body.password,
 		function(err, account) {
 		if (err) {
-			return res.render('register', { account : account });
+			return res.render('cref', { account : account });
 		}
 		res.redirect('/admin');
 	});

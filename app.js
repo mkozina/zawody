@@ -73,10 +73,10 @@ if ('development' == env) {
 let routes = require('./routes');
 
 app.get('/', routes.index);
-app.get('/register', routes.register);
+app.get('/cref', routes.cref);
 app.get('/login', routes.login);
 app.get('/logout', routes.logout);
-app.post('/register', routes.registerPost);
+app.post('/cref', routes.crefPost);
 app.post('/login', passport.authenticate('local'), routes.loginPost);
 app.get('/admin', routes.admin);
 app.get('/ref', routes.ref);
