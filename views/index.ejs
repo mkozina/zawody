@@ -1,10 +1,12 @@
 <% if (!user) { %>
 	<a href="/login">Zaloguj</a>
-	<a href="/register">Zarejestruj</a>
 <% } %>
 <% if (user) { %>
 	<p>Jesteś aktualnie zalogowany jako <%= user.username %></p>
-	<a href="/logout">Wyloguj</a>
+	<% if (user.type == "admin") { %>
+		<p>Przejdź do <a href="/admin">panelu administratora</a></p>
+	<% }else{ %>
+		<p>Przejdź do <a href="/ref">panelu sędziego</a></p>
+	<% } %>
+	<p><a href="/logout">Wyloguj</a></p>
 <% } %>
-
-

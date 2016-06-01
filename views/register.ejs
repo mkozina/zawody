@@ -1,9 +1,10 @@
 <h1>Strona rejestracyjna</h1>
 
-<p>Wprowadź dane aby zarejestrować nowego użytkownika:</p>
+<p>Wprowadź dane aby zarejestrować nowego sędziego:</p>
 
 <form action="/register" method="post">
 <input type="text" name="username" placeholder="Nazwa użytkownika" />
 <input type="password" name="password" placeholder="Hasło" />
+<input type="hidden" name="type" value="ref" />
 <button type="submit">Submit</button>
 <a href="/"><button type="button">Cancel</button></a>

@@ -78,6 +78,8 @@ app.get('/login', routes.login);
 app.get('/logout', routes.logout);
 app.post('/register', routes.registerPost);
 app.post('/login', passport.authenticate('local'), routes.loginPost);
+app.get('/admin', routes.admin);
+app.get('/ref', routes.ref);
 
 let sio = socketIo.listen(server);
 
