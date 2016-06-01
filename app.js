@@ -42,7 +42,7 @@ app.set('layout', 'layout');
 app.use(expressLayouts);
 
 //app.use(favicon(__dirname + '/public/favicon.ico'));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(session({
@@ -82,6 +82,8 @@ app.get('/admin', routes.admin);
 app.get('/ref', routes.ref);
 app.get('/ccontestant', routes.ccontestant);
 app.post('/ccontestant', routes.ccontestantPost);
+app.get('/ccontest', routes.ccontest);
+app.post('/ccontest', routes.ccontestPost);
 
 let sio = socketIo.listen(server);
 

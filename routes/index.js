@@ -2,6 +2,7 @@ var express = require('express');
 var passport = require('passport');
 var Account = require('../models/account');
 var Contestant = require('../models/contestant');
+var Contest = require('../models/contest');
 
 exports.index = function (req, res) {
 	res.render('index', { user : req.user });
@@ -71,6 +72,47 @@ exports.ccontestantPost = function(req, res) {
 		} else {
 			console.dir(err);
 			return res.render('ccontestant', { err: err });
+		}        
+    });
+};
+
+exports.ccontest = function (req, res) {
+
+	Contestant.find({}, function(err, contestants) {
+//		var Obj = function(pname, psex) {
+//			this.name = pname;
+//			this.sex = psex;
+//		};
+		var contestantArr = [];
+		var i = 0;
+		contestants.forEach(function(contestant) {
+//			var newObj = new Obj(contestant.name, contestant.sex);
+			contestantArr[i] = contestant;
+//			console.dir(contestantArr[i]);
+			i++;
+		});
+
+		res.render('ccontest', { err: null, contestants: contestantArr });
+	});
+
+};
+
+exports.ccontestPost = function(req, res) {
+	var newContest = new Contest({
+		name: req.body.name,
+		scores: req.body.scores,
+		granulation: req.body.granulation,
+		noref: req.body.noref,
+		dateofcontest: req.body.dateofcontest,
+		startinglist: req.body.arr
+	});
+	newContest.save(function (err, item) {
+		if (!err) {
+			console.log(item);
+			return res.send({redirect: '/admin'});
+		} else {
+			console.dir(err);
+			return res.render('ccontest', { err: err });
 		}        
     });
 };
