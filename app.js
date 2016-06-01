@@ -80,6 +80,8 @@ app.post('/cref', routes.crefPost);
 app.post('/login', passport.authenticate('local'), routes.loginPost);
 app.get('/admin', routes.admin);
 app.get('/ref', routes.ref);
+app.get('/ccontestant', routes.ccontestant);
+app.post('/ccontestant', routes.ccontestantPost);
 
 let sio = socketIo.listen(server);
 
