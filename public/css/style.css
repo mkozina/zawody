@@ -5,9 +5,14 @@ body {
   justify-content: center;
   align-items: center;
 }
-#indexlogin {
+.form {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+}
+.radio {
+  display: inline;
+}
+.button {
+  display: inline;
 }
