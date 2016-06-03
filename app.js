@@ -84,6 +84,10 @@ app.get('/ccontestant', routes.ccontestant);
 app.post('/ccontestant', routes.ccontestantPost);
 app.get('/ccontest', routes.ccontest);
 app.post('/ccontest', routes.ccontestPost);
+app.get('/cgroup1', routes.cgroup1);
+app.post('/cgroup1', routes.cgroup1Post);
+app.get('/cgroup2', routes.cgroup2);
+app.post('/cgroup2', routes.cgroup2Post);
 
 let sio = socketIo.listen(server);
 

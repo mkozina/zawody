@@ -3,6 +3,7 @@ var passport = require('passport');
 var Account = require('../models/account');
 var Contestant = require('../models/contestant');
 var Contest = require('../models/contest');
+var Group = require('../models/group');
 
 exports.index = function (req, res) {
 	res.render('index', { user : req.user });
@@ -113,6 +114,62 @@ exports.ccontestPost = function(req, res) {
 		} else {
 			console.dir(err);
 			return res.render('ccontest', { err: err });
+		}        
+    });
+};
+
+exports.cgroup1 = function (req, res) {
+
+	Contest.find({}, function(err, contests) {
+//		var Obj = function(pname, psex) {
+//			this.name = pname;
+//			this.sex = psex;
+//		};
+		var contestArr = [];
+		var i = 0;
+		contests.forEach(function(contest) {
+//			var newObj = new Obj(contestant.name, contestant.sex);
+			contestArr[i] = contest;
+//			console.dir(contestantArr[i]);
+			i++;
+		});
+
+		res.render('cgroup1', { err: null, contests: contestArr });
+	});
+
+};
+
+exports.cgroup1Post = function(req, res) {
+	var nameofcontest = req.body.nameofcontest;
+	
+	Contest.findOne({ name: nameofcontest}, function (err, doc){
+		console.log(doc);
+		res.render('cgroup2', { contest: doc });
+	});
+};
+
+exports.cgroup2 = function (req, res) {
+	
+};
+
+exports.cgroup2Post = function(req, res) {
+	var newGroupF = new Group({
+		nameofcontest: req.body.nameofcontest,
+		name: req.body.namef,
+		grouplist: req.body.arrf
+	});
+	var newGroupM = new Group({
+		nameofcontest: req.body.nameofcontest,
+		name: req.body.namem,
+		grouplist: req.body.arrm
+	});
+	newContest.save(function (err, item) {
+		if (!err) {
+			console.log(item);
+			return res.send({redirect: '/admin'});
+		} else {
+			console.dir(err);
+			return res.render('cgroup2', { err: err });
 		}        
     });
 };

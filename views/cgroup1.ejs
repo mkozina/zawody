@@ -1,0 +1,18 @@
+<h1>Podział zawodów na grupy</h1>
+
+<form class="form" action="/cgroup1" method="post">
+
+<p>
+	<select id="addcontest" name="nameofcontest">
+		<% contests.forEach(function(contest) { %>
+		<option value="<%= contest.name %>"><%= contest.name %></option>
+		<% }); %>
+	</select>
+</p>
+
+<div class="buttons">
+	<button type="submit">Get Data</button>
+	<a href="/admin"><button type="button">Cancel</button></a>
+</div>
+
+</form>
