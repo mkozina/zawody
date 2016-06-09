@@ -15,7 +15,7 @@ exports.login = function (req, res) {
 
 exports.loginPost = function(req, res) {
 	if (req.user.type == "admin") res.render('admin', {});
-	else res.render('ref', {});
+	else if (req.user.type == "ref") res.render('ref', {});
 };
 
 exports.logout = function (req, res) {
@@ -54,6 +54,45 @@ exports.crefPost = function(req, res) {
 		if (err) {
 			return res.render('cref', { account: account });
 		}
+		res.redirect('/lref');
+	});
+};
+
+exports.rref = function(req, res) {
+	var nameofref = req.query.username;
+	
+	Account.findOne({ username: nameofref}, function (err, doc){
+		res.render('rref', { account: doc });
+	});
+};
+
+exports.uref = function (req, res) {
+	var nameofref = req.query.username;
+
+	Account.findOne({ username: nameofref }, function (err, doc){
+		res.render('uref', { account: doc });
+	});
+};
+
+exports.urefPost = function(req, res) {
+	var nameofref = req.body.username;
+
+	Account.findOneAndRemove({ username: nameofref }, function(err, doc){
+
+	});
+	Account.register(new Account({ username: req.body.username, type: req.body.type }), req.body.password,
+		function(err, account) {
+		if (err) {
+			return res.render('uref', { account: account });
+		}
+		res.redirect('/lref');
+	});
+};
+
+exports.drefPost = function(req, res) {
+	var nameofref = req.body.username;
+
+	Account.findOneAndRemove({ username: nameofref }, function(err, doc){
 		res.redirect('/lref');
 	});
 };

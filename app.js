@@ -83,6 +83,10 @@ app.get('/admin', routes.admin);
 app.get('/lref', routes.lref);
 app.get('/cref', routes.cref);
 app.post('/cref', routes.crefPost);
+app.get('/rref', routes.rref);
+app.get('/uref', routes.uref);
+app.post('/uref', routes.urefPost);
+app.post('/dref', routes.drefPost);
 
 app.get('/ref', routes.ref);
 
