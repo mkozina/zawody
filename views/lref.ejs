@@ -1,0 +1,40 @@
+<h1>Zarządzanie kontami sędziów</h1>
+
+<p><a href="/cref">Utwórz konto dla nowego sędziego</a></p>
+
+<table>
+
+	<tr>
+		<th>Nazwisko</th>
+		<th colspan="3"></th>
+	</tr>
+
+	<% accounts.forEach(function(account) { %>
+	<% if (account.type == "ref") { %>
+	<tr>
+		<td><%= account.username %></td>
+		<td>
+			<form class="form" action="/rref" method="get">
+				<input type="hidden" name="username" value="<%= account.username %>" />
+				<button type="submit">Pokaż</button>
+			</form>
+		</td>
+		<td>
+			<form class="form" action="/uref" method="get">
+				<input type="hidden" name="username" value="<%= account.username %>" />
+				<button type="submit">Edytuj</button>
+			</form>
+		</td>
+		<td>
+			<form class="form" action="/dref" method="post">
+				<input type="hidden" name="username" value="<%= account.username %>" />
+				<button type="submit">Usuń</button>
+			</form>
+		</td>
+	</tr>
+	<% } %>
+	<% }); %>
+
+</table>
+
+<p><a href="/admin">Cofnij się</a></p>

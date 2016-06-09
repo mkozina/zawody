@@ -9,32 +9,18 @@ exports.index = function (req, res) {
 	res.render('index', { user : req.user });
 };
 
-exports.cref = function (req, res) {
-	res.render('cref', { });
-};
-
 exports.login = function (req, res) {
 	res.render('login', { user : req.user });
-};
-
-exports.logout = function (req, res) {
-	req.logout();
-	res.redirect('/');
-};
-
-exports.crefPost = function(req, res) {
-	Account.register(new Account({ username: req.body.username, type: req.body.type }), req.body.password,
-		function(err, account) {
-		if (err) {
-			return res.render('cref', { account: account });
-		}
-		res.redirect('/admin');
-	});
 };
 
 exports.loginPost = function(req, res) {
 	if (req.user.type == "admin") res.render('admin', {});
 	else res.render('ref', {});
+};
+
+exports.logout = function (req, res) {
+	req.logout();
+	res.redirect('/');
 };
 
 exports.admin = function (req, res) {
@@ -46,6 +32,32 @@ exports.admin = function (req, res) {
 	}
 };
 
+exports.lref = function (req, res) {
+	Account.find({}, function(err, accounts) {
+		var accountArr = [];
+		var i = 0;
+		accounts.forEach(function(account) {
+			accountArr[i] = account;
+			i++;
+		});
+		res.render('lref', { err: null, accounts: accountArr });
+	});
+};
+
+exports.cref = function (req, res) {
+	res.render('cref', { });
+};
+
+exports.crefPost = function(req, res) {
+	Account.register(new Account({ username: req.body.username, type: req.body.type }), req.body.password,
+		function(err, account) {
+		if (err) {
+			return res.render('cref', { account: account });
+		}
+		res.redirect('/lref');
+	});
+};
+
 exports.ref = function (req, res) {
 	if (req.user) {
 		if (req.user.type == "ref") res.render('ref', { });
@@ -54,6 +66,9 @@ exports.ref = function (req, res) {
 		res.render('error', {});
 	}
 };
+
+
+
 
 exports.ccontestant = function (req, res) {
 	res.render('ccontestant', { err: null });
