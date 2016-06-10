@@ -1,0 +1,21 @@
+<h1>Dane zawodnika</h1>
+
+<p>Nazwa: <%= contestant.name %></p>
+
+<p>Płeć: 
+	<% if (contestant.sex == "male") { %>
+	ogier
+	<% } else if (contestant.sex == "female") {%>
+	klacz
+	<% } %>
+</p>
+
+<p>Data urodzenia: 
+	<%= contestant.dateofbirth.getFullYear() + '-' + 
+	('0' + (contestant.dateofbirth.getMonth()+1)).slice(-2) + '-' + 
+	('0' + contestant.dateofbirth.getDate()).slice(-2) %>
+</p>
+
+<p>Hodowca: <%= contestant.breeder %></p>
+
+<p><a href="/lcontestant">Cofnij się</a></p>

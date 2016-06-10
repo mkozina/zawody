@@ -88,12 +88,18 @@ app.get('/uref', routes.uref);
 app.post('/uref', routes.urefPost);
 app.post('/dref', routes.drefPost);
 
+app.get('/lcontestant', routes.lcontestant);
+app.get('/ccontestant', routes.ccontestant);
+app.post('/ccontestant', routes.ccontestantPost);
+app.get('/rcontestant', routes.rcontestant);
+app.get('/ucontestant', routes.ucontestant);
+app.post('/ucontestant', routes.ucontestantPost);
+app.post('/dcontestant', routes.dcontestantPost);
+
 app.get('/ref', routes.ref);
 
 
 
-app.get('/ccontestant', routes.ccontestant);
-app.post('/ccontestant', routes.ccontestantPost);
 app.get('/ccontest', routes.ccontest);
 app.post('/ccontest', routes.ccontestPost);
 app.get('/cgroup1', routes.cgroup1);

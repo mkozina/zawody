@@ -97,17 +97,17 @@ exports.drefPost = function(req, res) {
 	});
 };
 
-exports.ref = function (req, res) {
-	if (req.user) {
-		if (req.user.type == "ref") res.render('ref', { });
-		else res.render('error', {});
-	} else {
-		res.render('error', {});
-	}
+exports.lcontestant = function (req, res) {
+	Contestant.find({}, function(err, contestants) {
+		var contestantArr = [];
+		var i = 0;
+		contestants.forEach(function(contestant) {
+			contestantArr[i] = contestant;
+			i++;
+		});
+		res.render('lcontestant', { err: null, contestants: contestantArr });
+	});
 };
-
-
-
 
 exports.ccontestant = function (req, res) {
 	res.render('ccontestant', { err: null });
@@ -123,13 +123,67 @@ exports.ccontestantPost = function(req, res) {
 	newContestant.save(function (err, item) {
 		if (!err) {
 			console.log(item);
-			return res.redirect('/admin');
+			return res.redirect('/lcontestant');
 		} else {
 			console.dir(err);
 			return res.render('ccontestant', { err: err });
 		}        
     });
 };
+
+exports.rcontestant = function(req, res) {
+	var nameofcontestant = req.query.name;
+	
+	Contestant.findOne({ name: nameofcontestant}, function (err, doc){
+		res.render('rcontestant', { contestant: doc });
+	});
+};
+
+exports.ucontestant = function (req, res) {
+	var nameofcontestant = req.query.name;
+
+	Contestant.findOne({ name: nameofcontestant }, function (err, doc){
+		res.render('ucontestant', { contestant: doc });
+	});
+};
+
+exports.ucontestantPost = function(req, res) {
+	var nameofcontestant = req.body.name;
+
+	Contestant.findOne({ name: nameofcontestant }, function(err, doc){
+		doc.name = req.body.name;
+		doc.sex = req.body.sex;
+		doc.dateofbirth = req.body.dateofbirth;
+		doc.breeder = req.body.breeder;
+		doc.save(function (err) {
+			if(err) {
+				console.error('ERROR!');
+			} else res.redirect('/lcontestant');
+		});
+	});
+};
+
+exports.dcontestantPost = function(req, res) {
+	var nameofcontestant = req.body.name;
+
+	Contestant.findOneAndRemove({ name: nameofcontestant }, function(err, doc){
+		res.redirect('/lcontestant');
+	});
+};
+
+exports.ref = function (req, res) {
+	if (req.user) {
+		if (req.user.type == "ref") res.render('ref', { });
+		else res.render('error', {});
+	} else {
+		res.render('error', {});
+	}
+};
+
+
+
+
+
 
 exports.ccontest = function (req, res) {
 

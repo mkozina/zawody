@@ -1,0 +1,58 @@
+<h1>Zarządzanie zawodnikami</h1>
+
+<p><a href="/ccontestant">Dodaj nowego zawodnika</a></p>
+
+<table>
+
+	<tr>
+		<th>Nazwa</th>
+		<th>Płeć</th>
+		<th>Data urodzenia</th>
+		<th>Hodowca</th>
+		<th colspan="3"></th>
+	</tr>
+
+	<% contestants.forEach(function(contestant) { %>
+	<tr>
+
+		<td><%= contestant.name %></td>
+
+		<% if (contestant.sex == "male") { %>
+		<td>ogier</td>
+		<% } else if (contestant.sex == "female") {%>
+		<td>klacz</td>
+		<% } %>
+
+		<td>
+			<%= contestant.dateofbirth.getFullYear() + '-' + 
+				('0' + (contestant.dateofbirth.getMonth()+1)).slice(-2) + '-' + 
+				('0' + contestant.dateofbirth.getDate()).slice(-2) %>
+		</td>
+
+		<td><%= contestant.breeder %></td>
+
+		<td>
+			<form class="form" action="/rcontestant" method="get">
+				<input type="hidden" name="name" value="<%= contestant.name %>" />
+				<button type="submit">Pokaż</button>
+			</form>
+		</td>
+		<td>
+			<form class="form" action="/ucontestant" method="get">
+				<input type="hidden" name="name" value="<%= contestant.name %>" />
+				<button type="submit">Edytuj</button>
+			</form>
+		</td>
+		<td>
+			<form class="form" action="/dcontestant" method="post">
+				<input type="hidden" name="name" value="<%= contestant.name %>" />
+				<button type="submit">Usuń</button>
+			</form>
+		</td>
+
+	</tr>
+	<% }); %>
+
+</table>
+
+<p><a href="/admin">Cofnij się</a></p>
