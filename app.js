@@ -1,5 +1,20 @@
 "use strict";
 
+var os = require('os');
+
+var interfaces = os.networkInterfaces();
+var addresses = [];
+for (var k in interfaces) {
+    for (var k2 in interfaces[k]) {
+        var address = interfaces[k][k2];
+        if (address.family === 'IPv4' && !address.internal) {
+            addresses.push(address.address);
+        }
+    }
+}
+
+//console.log(addresses[0]);
+
 var path = require('path');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
@@ -104,14 +119,11 @@ app.get('/ucontest', routes.ucontest);
 app.post('/ucontest', routes.ucontestPost);
 app.post('/dcontest', routes.dcontestPost);
 
+app.get('/lgroup', routes.lgroup);
+app.get('/cgroup', routes.cgroup);
+app.post('/cgroup', routes.cgroupPost);
+
 app.get('/ref', routes.ref);
-
-
-
-app.get('/cgroup1', routes.cgroup1);
-app.post('/cgroup1', routes.cgroup1Post);
-app.get('/cgroup2', routes.cgroup2);
-app.post('/cgroup2', routes.cgroup2Post);
 
 let sio = socketIo.listen(server);
 
@@ -141,6 +153,6 @@ sio.sockets.on('connection', function (socket) {
 
 });
 
-server.listen(port, function () {
-	console.log('Serwer pod adresem https://localhost:' + port + '/');
+server.listen(port, addresses[0], function () {
+	console.log('Serwer pod adresem https://' + addresses[0] + ':' + port + '/');
 });

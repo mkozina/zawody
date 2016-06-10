@@ -277,6 +277,55 @@ exports.dcontestPost = function(req, res) {
 	});
 };
 
+exports.lgroup = function(req, res) {
+	var nameofcontest = req.query.name;
+	
+	Contest.findOne({ name: nameofcontest}, function (err, doc){
+		res.render('lgroup', { contest: doc });
+	});
+};
+
+exports.cgroup = function (req, res) {
+	var nameofcontest = req.query.name;
+	
+	Contest.findOne({ name: nameofcontest}, function (err, doc){
+
+		Contestant.find({}, function(err, contestants) {
+			var contestantArr = [];
+			var i = 0;
+			contestants.forEach(function(contestant) {
+				contestantArr[i] = contestant;
+				i++;
+			});
+
+		res.render('cgroup', { contestants: contestantArr, contest: doc });
+		});
+
+	});
+};
+
+exports.cgroupPost = function(req, res) {
+	var newGroupF = new Group({
+		nameofcontest: req.body.nameofcontest,
+		name: req.body.namef,
+		grouplist: req.body.arrf
+	});
+	var newGroupM = new Group({
+		nameofcontest: req.body.nameofcontest,
+		name: req.body.namem,
+		grouplist: req.body.arrm
+	});
+	newContest.save(function (err, item) {
+		if (!err) {
+			console.log(item);
+			return res.send({redirect: '/lcontest'});
+		} else {
+			console.dir(err);
+			return res.render('cgroup', { err: err });
+		}        
+    });
+};
+
 exports.ref = function (req, res) {
 	if (req.user) {
 		if (req.user.type == "ref") res.render('ref', { });
@@ -319,30 +368,4 @@ exports.cgroup1Post = function(req, res) {
 		console.log(doc);
 		res.render('cgroup2', { contest: doc });
 	});
-};
-
-exports.cgroup2 = function (req, res) {
-	
-};
-
-exports.cgroup2Post = function(req, res) {
-	var newGroupF = new Group({
-		nameofcontest: req.body.nameofcontest,
-		name: req.body.namef,
-		grouplist: req.body.arrf
-	});
-	var newGroupM = new Group({
-		nameofcontest: req.body.nameofcontest,
-		name: req.body.namem,
-		grouplist: req.body.arrm
-	});
-	newContest.save(function (err, item) {
-		if (!err) {
-			console.log(item);
-			return res.send({redirect: '/admin'});
-		} else {
-			console.dir(err);
-			return res.render('cgroup2', { err: err });
-		}        
-    });
 };
