@@ -1,0 +1,37 @@
+<h1>Dane zawodów</h1>
+
+<p>Nazwa: <%= contest.name %></p>
+
+<p>Punktacja: 
+	<% if (contest.scores == "ten") { %>
+	0...10
+	<% } else if (contest.scores == "twenty") {%>
+	0...20
+	<% } %>
+</p>
+
+<p>Ziarnistość: 
+	<% if (contest.granulation == "full") { %>
+	tylko całe punkty
+	<% } else if (contest.granulation == "half") {%>
+	połówki punktów
+	<% } %>
+</p>
+
+<p>Liczba sędziów w grupach: <%= contest.noref %></p>
+
+<p>Data zawodów: 
+	<%= contest.dateofcontest.getFullYear() + '-' + 
+	('0' + (contest.dateofcontest.getMonth()+1)).slice(-2) + '-' + 
+	('0' + contest.dateofcontest.getDate()).slice(-2) %>
+</p>
+
+<p>Lista startowa: 
+	<ul>
+	<% contest.startinglist.forEach(function(contestant) { %>
+		<li><%= contestant.no %>. <%= contestant.name %></li>
+	<% }); %>
+</ul>
+</p>
+
+<p><a href="/lcontest">Cofnij się</a></p>

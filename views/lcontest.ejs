@@ -1,0 +1,71 @@
+<h1>Zarządzanie zawodami</h1>
+
+<p><a href="/ccontest">Utwórz nowe zawody</a></p>
+
+<table>
+
+	<tr>
+		<th>Nazwa</th>
+		<th>Punktacja</th>
+		<th>Ziarnistość</th>
+		<th>Liczba sędziów w grupach</th>
+		<th>Data zawodów</th>
+		<th colspan="4"></th>
+	</tr>
+
+	<% contests.forEach(function(contest) { %>
+	<tr>
+
+		<td><%= contest.name %></td>
+
+		<% if (contest.scores == "ten") { %>
+		<td>0...10</td>
+		<% } else if (contest.scores == "twenty") {%>
+		<td>0...20</td>
+		<% } %>
+
+		<% if (contest.granulation == "full") { %>
+		<td>tylko całe punkty</td>
+		<% } else if (contest.granulation == "half") {%>
+		<td>połówki punktów</td>
+		<% } %>
+
+		<td><%= contest.noref %></td>
+
+		<td>
+			<%= contest.dateofcontest.getFullYear() + '-' + 
+				('0' + (contest.dateofcontest.getMonth()+1)).slice(-2) + '-' + 
+				('0' + contest.dateofcontest.getDate()).slice(-2) %>
+		</td>
+
+		<td>
+			<form class="form" action="/rcontest" method="get">
+				<input type="hidden" name="name" value="<%= contest.name %>" />
+				<button type="submit">Pokaż</button>
+			</form>
+		</td>
+		<td>
+			<form class="form" action="/ucontest" method="get">
+				<input type="hidden" name="name" value="<%= contest.name %>" />
+				<button type="submit">Edytuj</button>
+			</form>
+		</td>
+		<td>
+			<form class="form" action="/dcontest" method="post">
+				<input type="hidden" name="name" value="<%= contest.name %>" />
+				<button type="submit">Usuń</button>
+			</form>
+		</td>
+		<td>
+			<form class="form" action="/cgroup1" method="get">
+				<input type="hidden" name="name" value="<%= contest.name %>" />
+				<button type="submit">Grupy</button>
+			</form>
+		</td>
+
+	</tr>
+	<% }); %>
+
+</table>
+
+<p><a href="/admin">Cofnij się</a></p>

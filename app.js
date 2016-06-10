@@ -96,12 +96,18 @@ app.get('/ucontestant', routes.ucontestant);
 app.post('/ucontestant', routes.ucontestantPost);
 app.post('/dcontestant', routes.dcontestantPost);
 
+app.get('/lcontest', routes.lcontest);
+app.get('/ccontest', routes.ccontest);
+app.post('/ccontest', routes.ccontestPost);
+app.get('/rcontest', routes.rcontest);
+app.get('/ucontest', routes.ucontest);
+app.post('/ucontest', routes.ucontestPost);
+app.post('/dcontest', routes.dcontestPost);
+
 app.get('/ref', routes.ref);
 
 
 
-app.get('/ccontest', routes.ccontest);
-app.post('/ccontest', routes.ccontestPost);
 app.get('/cgroup1', routes.cgroup1);
 app.post('/cgroup1', routes.cgroup1Post);
 app.get('/cgroup2', routes.cgroup2);

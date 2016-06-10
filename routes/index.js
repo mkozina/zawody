@@ -171,19 +171,17 @@ exports.dcontestantPost = function(req, res) {
 	});
 };
 
-exports.ref = function (req, res) {
-	if (req.user) {
-		if (req.user.type == "ref") res.render('ref', { });
-		else res.render('error', {});
-	} else {
-		res.render('error', {});
-	}
+exports.lcontest = function (req, res) {
+	Contest.find({}, function(err, contests) {
+		var contestArr = [];
+		var i = 0;
+		contests.forEach(function(contest) {
+			contestArr[i] = contest;
+			i++;
+		});
+		res.render('lcontest', { err: null, contests: contestArr });
+	});
 };
-
-
-
-
-
 
 exports.ccontest = function (req, res) {
 
@@ -218,13 +216,80 @@ exports.ccontestPost = function(req, res) {
 	newContest.save(function (err, item) {
 		if (!err) {
 			console.log(item);
-			return res.send({redirect: '/admin'});
+			return res.send({redirect: '/lcontest'});
 		} else {
 			console.dir(err);
 			return res.render('ccontest', { err: err });
 		}        
     });
 };
+
+exports.rcontest = function(req, res) {
+	var nameofcontest = req.query.name;
+	
+	Contest.findOne({ name: nameofcontest}, function (err, doc){
+		res.render('rcontest', { contest: doc });
+	});
+};
+
+exports.ucontest = function (req, res) {
+	var nameofcontest = req.query.name;
+
+	Contest.findOne({ name: nameofcontest }, function (err, doc){
+
+		Contestant.find({}, function(err, contestants) {
+			var contestantArr = [];
+			var i = 0;
+			contestants.forEach(function(contestant) {
+				contestantArr[i] = contestant;
+				i++;
+			});
+
+			res.render('ucontest', { err: null, contestants: contestantArr, contest: doc });
+		});
+
+	});
+};
+
+exports.ucontestPost = function(req, res) {
+	var nameofcontest = req.body.name;
+
+	Contest.findOne({ name: nameofcontest }, function(err, doc){
+		doc.name = req.body.name;
+		doc.scores = req.body.scores;
+		doc.granulation = req.body.granulation;
+		doc.noref = req.body.noref;
+		doc.dateofcontest = req.body.dateofcontest;
+		doc.startinglist = req.body.arr;
+		doc.save(function (err) {
+			if(err) {
+				console.error('ERROR!');
+			} else res.send({redirect: '/lcontest'});
+		});
+	});
+};
+
+exports.dcontestPost = function(req, res) {
+	var nameofcontest = req.body.name;
+
+	Contest.findOneAndRemove({ name: nameofcontest }, function(err, doc){
+		res.redirect('/lcontest');
+	});
+};
+
+exports.ref = function (req, res) {
+	if (req.user) {
+		if (req.user.type == "ref") res.render('ref', { });
+		else res.render('error', {});
+	} else {
+		res.render('error', {});
+	}
+};
+
+
+
+
+
 
 exports.cgroup1 = function (req, res) {
 
