@@ -61,6 +61,10 @@ $( "#addfemaleref" ).click(function() {
 	});
 
 	$.each(arrfref, function(index, value) {
+		value.no = index+1;
+	});
+
+	$.each(arrfref, function(index, value) {
 		newHTML.push('<ul>');
     	newHTML.push(
 		'<li>' +
@@ -92,6 +96,10 @@ $( "#groupfemaleref" ).on("click", "button.del", function() {
 			}
 		}
 	}
+
+	$.each(arrfref, function(index, value) {
+		value.no = index+1;
+	});
 
 	$.each(arrfref, function(index, value) {
 		newHTML.push('<ul>');
@@ -135,6 +143,10 @@ $( "#addmaleref" ).click(function() {
 	});
 
 	$.each(arrmref, function(index, value) {
+		value.no = index+1;
+	});
+
+	$.each(arrmref, function(index, value) {
 		newHTML.push('<ul>');
     	newHTML.push(
 		'<li>' +
@@ -166,6 +178,10 @@ $( "#groupmaleref" ).on("click", "button.del", function() {
 			}
 		}
 	}
+
+	$.each(arrmref, function(index, value) {
+		value.no = index+1;
+	});
 
 	$.each(arrmref, function(index, value) {
 		newHTML.push('<ul>');
