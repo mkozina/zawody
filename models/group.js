@@ -4,7 +4,8 @@ var Schema = mongoose.Schema;
 var Group = new Schema({
 	nameofcontest: String,
 	name: String,
-	grouplist: []
+	grouplist: [],
+	reflist: []
 });
 
 module.exports = mongoose.model('Group', Group);
