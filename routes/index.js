@@ -356,6 +356,24 @@ exports.cgroupPost = function(req, res) {
     });
 };
 
+exports.contestadmin = function (req, res) {
+	var nameofcontest = req.query.name;
+	
+	Contest.findOne({ name: nameofcontest}, function (err, doc){
+		Group.find({ nameofcontest: nameofcontest}, function(err, groups) {
+			var groupArr = [];
+			var i = 0;
+			groups.forEach(function(group) {
+				groupArr[i] = group;
+				i++;
+			});
+
+			res.render('contestadmin', { contest: doc, groups: groupArr });
+		});
+
+	});
+};
+
 exports.ref = function (req, res) {
 	if (req.user) {
 		if (req.user.type == "ref") res.render('ref', { });
@@ -365,37 +383,6 @@ exports.ref = function (req, res) {
 	}
 };
 
+exports.contestref = function (req, res) {
 
-
-
-
-
-exports.cgroup1 = function (req, res) {
-
-	Contest.find({}, function(err, contests) {
-//		var Obj = function(pname, psex) {
-//			this.name = pname;
-//			this.sex = psex;
-//		};
-		var contestArr = [];
-		var i = 0;
-		contests.forEach(function(contest) {
-//			var newObj = new Obj(contestant.name, contestant.sex);
-			contestArr[i] = contest;
-//			console.dir(contestantArr[i]);
-			i++;
-		});
-
-		res.render('cgroup1', { err: null, contests: contestArr });
-	});
-
-};
-
-exports.cgroup1Post = function(req, res) {
-	var nameofcontest = req.body.nameofcontest;
-	
-	Contest.findOne({ name: nameofcontest}, function (err, doc){
-		console.log(doc);
-		res.render('cgroup2', { contest: doc });
-	});
 };

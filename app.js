@@ -123,7 +123,11 @@ app.get('/lgroup', routes.lgroup);
 app.get('/cgroup', routes.cgroup);
 app.post('/cgroup', routes.cgroupPost);
 
+app.get('/contestadmin', routes.contestadmin);
+
 app.get('/ref', routes.ref);
+
+app.get('/contestref', routes.contestref);
 
 let sio = socketIo.listen(server);
 
@@ -150,6 +154,7 @@ sio.use(passportSocketIo.authorize({
 }));
 
 sio.sockets.on('connection', function (socket) {
+	console.log('Uruchomiłem kanał "/"');
 
 });
 

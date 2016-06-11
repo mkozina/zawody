@@ -1,0 +1,51 @@
+<script src="jquery.min.js"></script>
+<script src="js/ioadmin.js"></script>
+
+<h1><img id="contestStatus" src="img/bullet_red.png" width="35" /><%= contest.name %></h1>
+
+<% groups.forEach(function(group) { %>
+<table>
+<caption><%= group.name %></caption>
+
+	<tr>
+		<th>Nr</th>
+		<th>Nazwa</th>
+		<th colspan="3"></th>
+	</tr>
+
+	<% group.grouplist.forEach(function(contestant) { %>
+	<tr>
+		<td><%= contestant.no %></td>
+		<td><%= contestant.name %></td>
+		<td><button name="start" type="button" value="<%= contestant.no %>">Start</button></td>
+		<td><button name="stop" type="button" value="<%= contestant.no %>">Stop</button></td>
+		<td><img id="img<%= contestant.no %>" src="img/wrong.png" width="35" /></td>
+	</tr>
+	<% }); %>
+
+</table>
+<% }); %>
+
+<input id="close" type="button" value="Zakończ">
+
+<table>
+<caption id="contestantDisplay"></caption>
+	<tr>
+		<th>Sędzia</th>
+		<th>Typ</th>
+		<th>Głowa i szyja</th>
+		<th>Kłoda</th>
+		<th>Nogi</th>
+		<th>Ruch</th>
+	</tr>
+<% for(var i=1; i<=contest.noref; i++) { %>
+	<tr id="<%= i %>">
+		<td class="username"></td>
+		<td class="typ"></td>
+		<td class="glowa"></td>
+		<td class="kloda"></td>
+		<td class="nogi"></td>
+		<td class="ruch"></td>
+	</tr>
+<% } %>
+</table>

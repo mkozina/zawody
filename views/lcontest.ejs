@@ -10,7 +10,7 @@
 		<th>Ziarnistość</th>
 		<th>Liczba sędziów w grupach</th>
 		<th>Data zawodów</th>
-		<th colspan="4"></th>
+		<th colspan="5"></th>
 	</tr>
 
 	<% contests.forEach(function(contest) { %>
@@ -60,6 +60,12 @@
 			<form class="form" action="/lgroup" method="get">
 				<input type="hidden" name="name" value="<%= contest.name %>" />
 				<button type="submit">Grupy</button>
+			</form>
+		</td>
+		<td>
+			<form class="form" action="/contestadmin" method="get">
+				<input type="hidden" name="name" value="<%= contest.name %>" />
+				<button type="submit">Rozpocznij</button>
 			</form>
 		</td>
 
