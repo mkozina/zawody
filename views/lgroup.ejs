@@ -1,0 +1,20 @@
+<h1>Grupy zawodów <%= contest.name %></h1>
+
+<form class="form" action="/cgroup" method="get">
+<input type="hidden" name="name" value="<%= contest.name %>" />
+<button type="submit">Grupy</button>
+
+<table>
+	<tr>
+		<th>Nazwa</th>
+		<th>Liczba zawodników</th>
+	</tr>
+	<% groups.forEach(function(group) { %>
+	<tr>
+		<td><%= group.name %></td>
+		<td><%= group.grouplist.length %></td>
+	</tr>
+	<% }); %>
+</table>
+
+<p><a href="/lcontest">Cofnij się</a></p>

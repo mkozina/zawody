@@ -281,7 +281,17 @@ exports.lgroup = function(req, res) {
 	var nameofcontest = req.query.name;
 	
 	Contest.findOne({ name: nameofcontest}, function (err, doc){
-		res.render('lgroup', { contest: doc });
+		Group.find({ nameofcontest: nameofcontest}, function(err, groups) {
+			var groupArr = [];
+			var i = 0;
+			groups.forEach(function(group) {
+				groupArr[i] = group;
+				i++;
+			});
+
+			res.render('lgroup', { contest: doc, groups: groupArr });
+		});
+
 	});
 };
 
@@ -298,7 +308,17 @@ exports.cgroup = function (req, res) {
 				i++;
 			});
 
-		res.render('cgroup', { contestants: contestantArr, contest: doc });
+			Account.find({}, function(err, accounts) {
+				var refArr = [];
+				var j = 0;
+				accounts.forEach(function(account) {
+					if(account.type == "ref") refArr[j] = account;
+					j++;
+				});
+
+				res.render('cgroup', { refs: refArr, contestants: contestantArr, contest: doc });
+			});
+
 		});
 
 	});
@@ -308,14 +328,24 @@ exports.cgroupPost = function(req, res) {
 	var newGroupF = new Group({
 		nameofcontest: req.body.nameofcontest,
 		name: req.body.namef,
-		grouplist: req.body.arrf
+		grouplist: req.body.arrf,
+		reflist: req.body.arrfref
 	});
 	var newGroupM = new Group({
 		nameofcontest: req.body.nameofcontest,
 		name: req.body.namem,
-		grouplist: req.body.arrm
+		grouplist: req.body.arrm,
+		reflist: req.body.arrmref
 	});
-	newContest.save(function (err, item) {
+	newGroupF.save(function (err, item) {
+		if (!err) {
+			console.log(item);
+		} else {
+			console.dir(err);
+			return res.render('cgroup', { err: err });
+		}        
+   });
+	newGroupM.save(function (err, item) {
 		if (!err) {
 			console.log(item);
 			return res.send({redirect: '/lcontest'});

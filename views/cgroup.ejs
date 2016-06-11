@@ -1,0 +1,108 @@
+<h1>Podział zawodów na grupy</h1>
+
+<form class="form" action="/cgroup" method="post">
+
+<input type="hidden" name="nameofcontest" value="<%= contest.name %>" />
+
+<input type="hidden" name="noref" value="<%= contest.noref %>" />
+
+<table>
+
+	<tr>
+		<td><input type="hidden" name="namem" value="Ogiery" /></td>
+		<td><input type="hidden" name="namef" value="Klacze" /></td>
+	</tr>
+
+	<tr>
+		<td>
+			<select id="addmalelist" name="startinglistmale">
+				<% contest.startinglist.forEach(function(slcontestant) { %>
+				<% contestants.forEach(function(contestant) { %>
+
+				<% if (slcontestant.name == contestant.name && contestant.sex == "male") { %>
+				<option value="<%= slcontestant.no %>-<%= slcontestant.name %>">
+					<%= slcontestant.no %>. <%= slcontestant.name %>
+				</option>
+				<% } %>
+
+				<% }); %>
+				<% }); %>
+			</select>
+			<button id="addmale" type="button">Add</button>
+		</td>
+		<td>
+			<select id="addmalelistref" name="startinglistmaleref">
+
+				<% refs.forEach(function(ref) { %>
+				<option value="<%= ref.username %>"><%= ref.username %></option>
+				<% }); %>
+
+			</select>
+			<button id="addmaleref" type="button">Add</button>
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			Grupa ogierów:
+			<div id="groupmale"></div>
+		</td>
+		<td>
+			<div class="errorref"></div>
+			Lista sędziów:
+			<div id="groupmaleref"></div>
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			<select id="addfemalelist" name="startinglistfemale">
+				<% contest.startinglist.forEach(function(slcontestant) { %>
+				<% contestants.forEach(function(contestant) { %>
+
+				<% if (slcontestant.name == contestant.name && contestant.sex == "female") { %>
+				<option value="<%= slcontestant.no %>-<%= slcontestant.name %>">
+					<%= slcontestant.no %>. <%= slcontestant.name %>
+				</option>
+				<% } %>
+
+				<% }); %>
+				<% }); %>
+			</select>
+			<button id="addfemale" type="button">Add</button>
+		</td>
+		<td>
+			<select id="addfemalelistref" name="startinglistfemaleref">
+
+				<% refs.forEach(function(ref) { %>
+				<option value="<%= ref.username %>"><%= ref.username %></option>
+				<% }); %>
+
+			</select>
+			<button id="addfemaleref" type="button">Add</button>
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			Grupa klaczy:
+			<div id="groupfemale"></div>
+		</td>
+		<td>
+			<div class="errorref"></div>
+			Lista sędziów:
+			<div id="groupfemaleref"></div>
+		</td>
+	</tr>
+
+</table>
+
+<div class="buttons">
+	<button type="submit">Submit</button>
+	<a href="/admin"><button type="button">Cancel</button></a>
+</div>
+
+</form>
+
+<script src="jquery.min.js"></script>
+<script src='/js/cgroup.js'></script>
