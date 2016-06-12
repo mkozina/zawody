@@ -91,7 +91,10 @@ $( ".form" ).submit(function( event ) {
 	var fnoref = $( this ).find( "input[name='noref']" ).val();
 	var fdateofcontest = $( this ).find( "input[name='dateofcontest']" ).val();
 
-	$.post( 'https://localhost:3000/ucontest', {
+	var address = window.location.href.slice(8).split(":");
+	var addressPost = 'https://' + address[0] + ':3000/ucontest';
+
+	$.post( addressPost, {
 		arr: arr,
 		name: fname,
 		scores: fscores,
