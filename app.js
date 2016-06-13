@@ -163,7 +163,6 @@ sio.sockets.on('connection', function (socket) {
 	console.log('Uruchomiłem kanał "/"');
 
 	socket.on('contest', function (data) {
-		console.log('/: ' + data);
 		socket.join(data);
 		var r;
 		for(r=0;r<rooms.length;++r){
@@ -174,26 +173,21 @@ sio.sockets.on('connection', function (socket) {
 			i_room++;
 		}
 		exist=0;
-		console.log(rooms);
 	});
 
 	socket.on('group', function (data) {
-		console.log('/: ' + data);
 		socket.broadcast.emit('group', data);
 	});
 
 	socket.on('contestant', function (data) {
-		console.log('/: ' + data);
 		socket.broadcast.emit('contestant', data);
 	});
 
 	socket.on('refs', function (data) {
-		console.log('/: ' + data);
 		socket.broadcast.emit('refs', data);
 	});
 
 	socket.on('score', function (data) {
-		console.log('/: ' + data);
 		socket.broadcast.emit('score', data);
 	});
 

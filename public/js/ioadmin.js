@@ -10,12 +10,6 @@ window.addEventListener("load", function(event) {
 	var stop = $('button[name="stop"]');
 	var close = document.getElementById("close");
 
-//	var typ = document.getElementById("typ");
-//	var glowa = document.getElementById("glowa");
-//	var kloda = document.getElementById("kloda");
-//	var nogi = document.getElementById("nogi");
-//	var ruch = document.getElementById("ruch");
-
 	var socket = io('https://' + location.host + '/');
 
 	var right = [];
