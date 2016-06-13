@@ -1,5 +1,11 @@
 "use strict";
 
+var rooms = [];
+var i_room = 0;
+var exist = 0;
+
+exports.rooms = rooms;
+
 var os = require('os');
 
 var interfaces = os.networkInterfaces();
@@ -155,6 +161,41 @@ sio.use(passportSocketIo.authorize({
 
 sio.sockets.on('connection', function (socket) {
 	console.log('Uruchomiłem kanał "/"');
+
+	socket.on('contest', function (data) {
+		console.log('/: ' + data);
+		socket.join(data);
+		var r;
+		for(r=0;r<rooms.length;++r){
+			if (rooms[r] == data) exist=1;
+		}
+		if (exist == 0) {
+			rooms[i_room] = data;
+			i_room++;
+		}
+		exist=0;
+		console.log(rooms);
+	});
+
+	socket.on('group', function (data) {
+		console.log('/: ' + data);
+		socket.broadcast.emit('group', data);
+	});
+
+	socket.on('contestant', function (data) {
+		console.log('/: ' + data);
+		socket.broadcast.emit('contestant', data);
+	});
+
+	socket.on('refs', function (data) {
+		console.log('/: ' + data);
+		socket.broadcast.emit('refs', data);
+	});
+
+	socket.on('score', function (data) {
+		console.log('/: ' + data);
+		socket.broadcast.emit('score', data);
+	});
 
 });
 

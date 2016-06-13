@@ -1,3 +1,21 @@
+<script src="jquery.min.js"></script>
+<script src="js/ref.js"></script>
+
 <h1>Panel sędziego</h1>
+
+<p>Weź udział w zawodach:
+
+<select id="contest">
+<% contests.forEach(function(contest) { %>
+<option value="<%= contest %>"><%= contest %></option>
+<% }); %>
+</select>
+
+<form class="form" action="/contestref" method="get">
+	<input id="contestname" type="hidden" name="name" value="" />
+	<button type="submit">Rozpocznij</button>
+</form>
+
+</p>
 
 <p><a href="/logout">Wyloguj</a></p>

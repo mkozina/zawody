@@ -4,6 +4,7 @@ var Account = require('../models/account');
 var Contestant = require('../models/contestant');
 var Contest = require('../models/contest');
 var Group = require('../models/group');
+var app = require('../app');
 
 exports.index = function (req, res) {
 	res.render('index', { user : req.user });
@@ -15,7 +16,7 @@ exports.login = function (req, res) {
 
 exports.loginPost = function(req, res) {
 	if (req.user.type == "admin") res.render('admin', {});
-	else if (req.user.type == "ref") res.render('ref', {});
+	else if (req.user.type == "ref") res.render('ref', { contests: app.rooms });
 };
 
 exports.logout = function (req, res) {
@@ -376,7 +377,7 @@ exports.contestadmin = function (req, res) {
 
 exports.ref = function (req, res) {
 	if (req.user) {
-		if (req.user.type == "ref") res.render('ref', { });
+		if (req.user.type == "ref") res.render('ref', { contests: app.rooms });
 		else res.render('error', {});
 	} else {
 		res.render('error', {});
@@ -384,5 +385,19 @@ exports.ref = function (req, res) {
 };
 
 exports.contestref = function (req, res) {
+	var nameofcontest = req.query.name;
+	
+	Contest.findOne({ name: nameofcontest}, function (err, doc){
+		Group.find({ nameofcontest: nameofcontest}, function(err, groups) {
+			var groupArr = [];
+			var i = 0;
+			groups.forEach(function(group) {
+				groupArr[i] = group;
+				i++;
+			});
 
+			res.render('contestref', { contest: doc, groups: groupArr, user : req.user });
+		});
+
+	});
 };
