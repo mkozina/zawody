@@ -1,5 +1,3 @@
-//dodac arrfref i arrmref + poprawić cgroupPost w index.js
-
 var nofref = 1;
 var nomref = 1;
 var arrfref = [];
