@@ -306,7 +306,8 @@ exports.lgroup = function(req, res) {
 				i++;
 			});
 
-			res.render('lgroup', { contest: doc, groups: groupArr });
+			if (req.user.type == "admin") res.render('admin/lgroup', { user : req.user, contest: doc, groups: groupArr });
+			else res.render('error', { user : req.user });
 		});
 
 	});
@@ -333,7 +334,8 @@ exports.cgroup = function (req, res) {
 					j++;
 				});
 
-				res.render('cgroup', { refs: refArr, contestants: contestantArr, contest: doc });
+				if (req.user.type == "admin") res.render('admin/cgroup', { user : req.user, refs: refArr, contestants: contestantArr, contest: doc });
+				else res.render('error', { user : req.user });
 			});
 
 		});
@@ -359,7 +361,7 @@ exports.cgroupPost = function(req, res) {
 			console.log(item);
 		} else {
 			console.dir(err);
-			return res.render('cgroup', { err: err });
+			return res.render('admin/cgroup', { user : req.user, err: err });
 		}        
    });
 	newGroupM.save(function (err, item) {
@@ -368,7 +370,7 @@ exports.cgroupPost = function(req, res) {
 			return res.send({redirect: '/lcontest'});
 		} else {
 			console.dir(err);
-			return res.render('cgroup', { err: err });
+			return res.render('admin/cgroup', { user : req.user, err: err });
 		}        
     });
 };
@@ -385,7 +387,8 @@ exports.contestadmin = function (req, res) {
 				i++;
 			});
 
-			res.render('contestadmin', { contest: doc, groups: groupArr });
+			if (req.user.type == "admin") res.render('admin/contestadmin', { user : req.user, contest: doc, groups: groupArr });
+			else res.render('error', { user : req.user });
 		});
 
 	});
@@ -408,7 +411,8 @@ exports.contestref = function (req, res) {
 				i++;
 			});
 
-			res.render('contestref', { contest: doc, groups: groupArr, user : req.user });
+			if (req.user.type == "ref") res.render('ref/contestref', { user : req.user, contest: doc, groups: groupArr });
+			else res.render('error', { user : req.user });
 		});
 
 	});

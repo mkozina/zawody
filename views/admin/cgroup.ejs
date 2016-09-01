@@ -1,3 +1,5 @@
+<div class="container">
+
 <h1>Podział zawodów na grupy</h1>
 
 <form class="form" action="/cgroup" method="post">
@@ -6,7 +8,7 @@
 
 <input type="hidden" name="noref" value="<%= contest.noref %>" />
 
-<table>
+<table class="table">
 
 	<tr>
 		<td><input type="hidden" name="namem" value="Ogiery" /></td>
@@ -15,7 +17,7 @@
 
 	<tr>
 		<td>
-			<select id="addmalelist" name="startinglistmale">
+			<select id="addmalelist" class="form-control" name="startinglistmale">
 				<% contest.startinglist.forEach(function(slcontestant) { %>
 				<% contestants.forEach(function(contestant) { %>
 
@@ -28,17 +30,17 @@
 				<% }); %>
 				<% }); %>
 			</select>
-			<button id="addmale" type="button">Add</button>
+			<button id="addmale" type="button" class="btn btn-link">Dodaj do grupy ogierów</button>
 		</td>
 		<td>
-			<select id="addmalelistref" name="startinglistmaleref">
+			<select id="addmalelistref" class="form-control" name="startinglistmaleref">
 
 				<% refs.forEach(function(ref) { %>
 				<option value="<%= ref.username %>"><%= ref.username %></option>
 				<% }); %>
 
 			</select>
-			<button id="addmaleref" type="button">Add</button>
+			<button id="addmaleref" type="button" class="btn btn-link">Dodaj sędziego do grupy ogierów</button>
 		</td>
 	</tr>
 
@@ -55,8 +57,13 @@
 	</tr>
 
 	<tr>
+		<td></td>
+		<td></td>
+	</tr>
+
+	<tr>
 		<td>
-			<select id="addfemalelist" name="startinglistfemale">
+			<select id="addfemalelist" class="form-control" name="startinglistfemale">
 				<% contest.startinglist.forEach(function(slcontestant) { %>
 				<% contestants.forEach(function(contestant) { %>
 
@@ -69,17 +76,17 @@
 				<% }); %>
 				<% }); %>
 			</select>
-			<button id="addfemale" type="button">Add</button>
+			<button id="addfemale" type="button" class="btn btn-link">Dodaj do grupy klaczy</button>
 		</td>
 		<td>
-			<select id="addfemalelistref" name="startinglistfemaleref">
+			<select id="addfemalelistref" class="form-control" name="startinglistfemaleref">
 
 				<% refs.forEach(function(ref) { %>
 				<option value="<%= ref.username %>"><%= ref.username %></option>
 				<% }); %>
 
 			</select>
-			<button id="addfemaleref" type="button">Add</button>
+			<button id="addfemaleref" type="button" class="btn btn-link">Dodaj sędziego do grupy klaczy</button>
 		</td>
 	</tr>
 
@@ -98,10 +105,16 @@
 </table>
 
 <div class="buttons">
-	<button type="submit">Submit</button>
-	<a href="/admin"><button type="button">Cancel</button></a>
+	<button type="submit" class="btn btn-primary">Zapisz</button>
 </div>
 
 </form>
+
+	<form action="/lgroup" method="get">
+		<input type="hidden" name="name" value="<%= contest.name %>" />
+		<button type="submit" class="btn btn-link">Anuluj</button>
+	</form>
+
+</div>
 
 <script src='/js/cgroup.js'></script>

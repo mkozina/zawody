@@ -1,11 +1,13 @@
 <script src="js/ioadmin.js"></script>
 
+<div class="container">
+
 <h1><img id="contestStatus" src="img/bullet_red.png" width="35" /><%= contest.name %></h1>
 
 <input type="hidden" name="nameofcontest" value="<%= contest.name %>" />
 
 <% groups.forEach(function(group) { %>
-<table>
+<table class="table">
 <caption><%= group.name %></caption>
 
 	<tr>
@@ -22,8 +24,8 @@
 	<tr>
 		<td><%= contestant.no %></td>
 		<td><%= contestant.name %></td>
-		<td><button name="start" type="button" value="<%= group.name %>-<%= contestant.no %>">Start</button></td>
-		<td><button name="stop" type="button" value="<%= group.name %>-<%= contestant.no %>">Stop</button></td>
+		<td><button name="start" type="button" class="btn btn-success" value="<%= group.name %>-<%= contestant.no %>">Start</button></td>
+		<td><button name="stop" type="button" class="btn btn-danger" value="<%= group.name %>-<%= contestant.no %>">Stop</button></td>
 		<td><img id="img<%= contestant.no %>" src="img/wrong.png" width="35" /></td>
 	</tr>
 	<% }); %>
@@ -31,9 +33,9 @@
 </table>
 <% }); %>
 
-<input id="close" type="button" value="Zakończ">
+<input id="close" type="button" class="btn btn-primary" value="Zakończ">
 
-<table>
+<table class="table">
 <caption id="contestantDisplay"></caption>
 	<tr>
 		<th>Sędzia</th>
@@ -56,3 +58,5 @@
 <% }); %>
 <% }); %>
 </table>
+
+</div>

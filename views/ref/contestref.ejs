@@ -1,5 +1,7 @@
 <script src="js/ioref.js"></script>
 
+<div class="container">
+
 <h1 id="contestname"><img id="contestStatus" src="img/bullet_red.png" width="35" />
 <%= contest.name %>
 </h1>
@@ -9,7 +11,7 @@
 <p>Zawodnik:</p>
 <p id="contestantno">brak</p>
 
-<table>
+<table class="table">
 
 	<tr>
 		<td>Typ: </td>
@@ -116,4 +118,6 @@
 <div id="err"></div>
 <input type="hidden" id="myname" value="<%= user.username %>" />
 <p>Oceniasz jako <%= user.username %></p>
-<button id="judge" name="stop" type="button" value="">Oceń</button>
+<button id="judge" class="btn btn-primary" name="stop" type="button" value="">Oceń</button>
+
+</div>
