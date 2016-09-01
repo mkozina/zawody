@@ -11,7 +11,7 @@ p {
   height: 80%;
   min-height: 80%;
 }
-.row {
+#vcenter {
   display: table-cell;
   vertical-align: middle;
 }

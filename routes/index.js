@@ -10,12 +10,12 @@ exports.index = function (req, res) {
 	res.render('index', { user : req.user });
 };
 
-exports.about = function (req, res) {
-	res.render('about', { user : req.user });
-};
-
 exports.contact = function (req, res) {
 	res.render('contact', { user : req.user });
+};
+
+exports.about = function (req, res) {
+	res.render('about', { user : req.user });
 };
 
 exports.login = function (req, res) {
@@ -23,8 +23,8 @@ exports.login = function (req, res) {
 };
 
 exports.loginPost = function(req, res) {
-	if (req.user.type == "admin") res.render('admin', { user : req.user });
-	else if (req.user.type == "ref") res.render('ref', { user : req.user, contests: app.rooms });
+	if (req.user.type == "admin") res.render('admin/admin', { user : req.user });
+	else if (req.user.type == "ref") res.render('ref/ref', { user : req.user, contests: app.rooms });
 };
 
 exports.logout = function (req, res) {
@@ -33,12 +33,8 @@ exports.logout = function (req, res) {
 };
 
 exports.admin = function (req, res) {
-	if (req.user) {
-		if (req.user.type == "admin") res.render('admin', { user : req.user });
-		else res.render('error', { user : req.user });
-	} else {
-		res.render('error', { user : req.user });
-	}
+	if (req.user.type == "admin") res.render('admin/admin', { user : req.user });
+	else res.render('error', { user : req.user });
 };
 
 exports.lref = function (req, res) {
@@ -384,12 +380,8 @@ exports.contestadmin = function (req, res) {
 };
 
 exports.ref = function (req, res) {
-	if (req.user) {
-		if (req.user.type == "ref") res.render('ref', { user : req.user, contests: app.rooms });
-		else res.render('error', { user : req.user });
-	} else {
-		res.render('error', { user : req.user });
-	}
+	if (req.user.type == "ref") res.render('ref/ref', { user : req.user, contests: app.rooms });
+	else res.render('error', { user : req.user });
 };
 
 exports.contestref = function (req, res) {
