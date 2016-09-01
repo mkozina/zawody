@@ -1,18 +1,14 @@
+html,
 body {
-  background-color: #c1eaf7;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  height: 100%;
 }
-.form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.container {
+  display: table;
+  width: 80%;
+  height: 80%;
+  min-height: 80%;
 }
-.radio {
-  display: inline;
-}
-.button {
-  display: inline;
+.row {
+  display: table-cell;
+  vertical-align: middle;
 }

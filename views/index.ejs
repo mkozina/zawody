@@ -1,12 +1,25 @@
-<% if (!user) { %>
-	<a href="/login">Zaloguj</a>
-<% } %>
-<% if (user) { %>
-	<p>Jesteś aktualnie zalogowany jako <%= user.username %></p>
-	<% if (user.type == "admin") { %>
-		<p>Przejdź do <a href="/admin">panelu administratora</a></p>
-	<% }else{ %>
-		<p>Przejdź do <a href="/ref">panelu sędziego</a></p>
-	<% } %>
-	<p><a href="/logout">Wyloguj</a></p>
-<% } %>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+			<img id="logo" class="center-block" src="/img/rainbow_dash2.png" height="432" width="480" alt="pony" />
+			<h1 class="text-center">Witaj w systemie zawodów konnych Ponyville!</h1>
+		</div>
+	</div>
+</div>
+
+<script>
+$(window).on("orientationchange",function(){
+	if(window.orientation == 0) // Portrait
+	{
+		$("#logo").attr("src","/img/rainbow_dash2.png");
+		$("#logo").attr("height","432");
+		$("#logo").attr("width","480");
+	}
+	else // Landscape
+	{
+		$("#logo").attr("src","/img/rainbow_dash.png");
+		$("#logo").attr("height","350");
+		$("#logo").attr("width","900");
+	}
+});
+</script>
