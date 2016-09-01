@@ -14,6 +14,10 @@ exports.about = function (req, res) {
 	res.render('about', { user : req.user });
 };
 
+exports.contact = function (req, res) {
+	res.render('contact', { user : req.user });
+};
+
 exports.login = function (req, res) {
 	res.render('login', { user : req.user });
 };

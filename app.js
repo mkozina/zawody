@@ -95,6 +95,7 @@ let routes = require('./routes');
 
 app.get('/', routes.index);
 
+app.get('/contact', routes.contact);
 app.get('/about', routes.about);
 
 app.get('/login', routes.login);
