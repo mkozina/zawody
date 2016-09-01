@@ -1,0 +1,34 @@
+<div class="container">
+
+<h1>Utwórz konto dla nowego sędziego</h1>
+
+<p>Wprowadź dane aby zarejestrować nowego sędziego:</p>
+
+<form class="form" action="/cref" method="post">
+
+<div class="row">
+<div class="form-group col-xs-4">
+<label for="nazwa">Nazwa użytkownika</label>
+<input type="text" class="form-control" name="username" placeholder="Nazwisko" />
+</div>
+</div>
+
+<div class="row">
+<div class="form-group col-xs-4">
+<label for="haslo">Hasło</label>
+<input type="password" class="form-control" name="password" placeholder="Hasło" />
+</div>
+</div>
+
+<input type="hidden" name="type" value="ref" />
+
+<div class="row">
+<div class="form-group col-xs-4">
+<button type="submit" class="btn btn-primary">Zapisz</button>
+<a href="/lref"><button type="button" class="btn btn-secondary">Anuluj</button></a>
+</div>
+</div>
+
+</form>
+
+</div>

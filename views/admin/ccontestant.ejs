@@ -1,0 +1,55 @@
+<div class="container">
+
+<h1>Dodaj nowego zawodnika</h1>
+
+<p>Wprowadź dane nowego zawodnika:</p>
+
+<% if(err) { %>
+	<p><%= err %></p>
+<% } %> 
+
+<form class="form" action="/ccontestant" method="post">
+
+<div class="row">
+<div class="form-group col-xs-4">
+<label for="nazwa">Nazwa zawodnika</label>
+<input type="text" class="form-control" name="name" placeholder="Nazwa zawodnika" />
+</div>
+</div>
+
+<div class="row">
+<div class="form-group col-xs-2">
+<label for="plec">Płeć</label>
+<div class="radio">
+<input type="radio" name="sex" value="male" checked> Ogier
+</div>
+<div class="radio">
+<input type="radio" name="sex" value="female"> Klacz
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="form-group col-xs-4">
+<label for="data">Data urodzenia</label>
+<input type="date" class="form-control" name="dateofbirth" placeholder="Data urodzenia" />
+</div>
+</div>
+
+<div class="row">
+<div class="form-group col-xs-4">
+<label for="hodowca">Hodowca</label>
+<input type="text" class="form-control" name="breeder" placeholder="Hodowca" />
+</div>
+</div>
+
+<div class="row">
+<div class="form-group col-xs-4">
+<button type="submit" class="btn btn-primary">Zapisz</button>
+<a href="/lcontestant"><button type="button" class="btn btn-secondary">Anuluj</button></a>
+</div>
+</div>
+
+</form>
+
+</div>

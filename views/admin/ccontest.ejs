@@ -1,0 +1,90 @@
+<div class="container">
+
+<h1>Utwórz nowe zawody</h1>
+
+<p>Wprowadź parametry nowych zawodów:</p>
+
+<% if(err) { %>
+	<p><%= err %></p>
+<% } %> 
+
+<form class="form" action="/ccontest" method="post">
+
+<div class="row">
+<div class="form-group col-xs-4">
+<label for="nazwa">Nazwa zawodów</label>
+<input type="text" class="form-control" name="name" placeholder="Nazwa zawodów" />
+</div>
+</div>
+
+<div class="row">
+<div class="form-group col-xs-4">
+<label for="punktacja">Punktacja</label>
+	<select class="form-control" name="scores">
+		<option value="ten">0...10</option>
+		<option value="twenty">0...20</option>
+	</select>
+</div>
+</div>
+
+<div class="row">
+<div class="form-group col-xs-4">
+<label for="ziarnistosc">Ziarnistość punktacji</label>
+	<div class="radio">
+		<input type="radio" name="granulation" value="full" checked> tylko całe punkty
+	</div>
+	<div class="radio">
+		<input type="radio" name="granulation" value="half"> połówki punktów
+	</div>
+</div>
+</div>
+
+<div class="row">
+<div class="form-group col-xs-4">
+<label for="liczba">Liczba sędziów w grupach</label>
+<input type="text" class="form-control" name="noref" placeholder="Liczba sędziów w grupach" />
+</div>
+</div>
+
+<div class="row">
+<div class="form-group col-xs-4">
+<label for="data">Data zawodów</label>
+<input type="date" class="form-control" name="dateofcontest" placeholder="Data zwodów" />
+</div>
+</div>
+
+<div class="row">
+<div class="form-group col-xs-4">
+	<label for="lista">Lista zawodników</label>
+	<select id="addcontestant" class="form-control" name="list">
+		<% contestants.forEach(function(contestant) { %>
+		<option value="<%= contestant.name %>"><%= contestant.name %></option>
+		<% }); %>
+	</select>
+</div>
+</div>
+<div class="row">
+<div class="form-group col-xs-4">
+	<button id="add" type="button" class="btn btn-link">Dodaj do listy startowej</button>
+</div>
+</div>
+
+<div class="row">
+<div class="form-group col-xs-4">
+	<label for="lista">Lista startowa</label>
+	<div id="startinglist"></div>
+</div>
+</div>
+
+<div class="row">
+<div class="form-group col-xs-4">
+	<button type="submit" class="btn btn-primary">Zapisz</button>
+	<a href="/lcontest"><button type="button" class="btn btn-secondary">Anuluj</button></a>
+</div>
+</div>
+
+</form>
+
+</div>
+
+<script src='/js/ccontest.js'></script>

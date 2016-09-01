@@ -1,0 +1,56 @@
+<div class="container">
+
+<h1>Zmodyfikuj dane zawodnika</h1>
+
+<p>Wprowadź nowe dane aby zmodyfikować informacje o zawodniku:</p>
+
+<form class="form" action="/ucontestant" method="post">
+
+<div class="row">
+<div class="form-group col-xs-4">
+<label for="nazwa">Nazwa zawodnika</label>
+<input type="text" class="form-control" name="name" value="<%= contestant.name %>" placeholder="Nazwa zawodnika" />
+</div>
+</div>
+
+<div class="row">
+<div class="form-group col-xs-2">
+<label for="plec">Płeć</label>
+<div class="radio">
+<input type="radio" name="sex" value="male"
+	<% if (contestant.sex == "male") { %> checked <% } %>> Ogier
+</div>
+<div class="radio">
+<input type="radio" name="sex" value="female"
+	<% if (contestant.sex == "female") { %> checked <% } %>> Klacz
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="form-group col-xs-4">
+<label for="data">Data urodzenia</label>
+<input type="date" class="form-control" name="dateofbirth"
+	value="<%= contestant.dateofbirth.getFullYear() + '-' + 
+	('0' + (contestant.dateofbirth.getMonth()+1)).slice(-2) + '-' + 
+	('0' + contestant.dateofbirth.getDate()).slice(-2) %>" placeholder="Data urodzenia" />
+</div>
+</div>
+
+<div class="row">
+<div class="form-group col-xs-4">
+<label for="hodowca">Hodowca</label>
+<input type="text" class="form-control" name="breeder" value="<%= contestant.breeder %>" placeholder="Hodowca" />
+</div>
+</div>
+
+<div class="row">
+<div class="form-group col-xs-4">
+<button type="submit" class="btn btn-primary">Zapisz</button>
+<a href="/lcontestant"><button type="button" class="btn btn-secondary">Anuluj</button></a>
+</div>
+</div>
+
+</form>
+
+</div>

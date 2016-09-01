@@ -45,19 +45,21 @@ exports.lref = function (req, res) {
 			accountArr[i] = account;
 			i++;
 		});
-		res.render('lref', { err: null, accounts: accountArr });
+		if (req.user.type == "admin") res.render('admin/lref', { user : req.user, err: null, accounts: accountArr });
+		else res.render('error', { user : req.user });
 	});
 };
 
 exports.cref = function (req, res) {
-	res.render('cref', { });
+	if (req.user.type == "admin") res.render('admin/cref', { user : req.user });
+	else res.render('error', { user : req.user });
 };
 
 exports.crefPost = function(req, res) {
 	Account.register(new Account({ username: req.body.username, type: req.body.type }), req.body.password,
 		function(err, account) {
 		if (err) {
-			return res.render('cref', { account: account });
+			return res.render('admin/cref', { user : req.user, account: account });
 		}
 		res.redirect('/lref');
 	});
@@ -67,7 +69,8 @@ exports.rref = function(req, res) {
 	var nameofref = req.query.username;
 	
 	Account.findOne({ username: nameofref}, function (err, doc){
-		res.render('rref', { account: doc });
+		if (req.user.type == "admin") res.render('admin/rref', { user : req.user, account: doc });
+		else res.render('error', { user : req.user });
 	});
 };
 
@@ -75,7 +78,8 @@ exports.uref = function (req, res) {
 	var nameofref = req.query.username;
 
 	Account.findOne({ username: nameofref }, function (err, doc){
-		res.render('uref', { account: doc });
+		if (req.user.type == "admin") res.render('admin/uref', { user : req.user, account: doc });
+		else res.render('error', { user : req.user });
 	});
 };
 
@@ -88,7 +92,7 @@ exports.urefPost = function(req, res) {
 	Account.register(new Account({ username: req.body.username, type: req.body.type }), req.body.password,
 		function(err, account) {
 		if (err) {
-			return res.render('uref', { account: account });
+			return res.render('admin/uref', { user : req.user, account: account });
 		}
 		res.redirect('/lref');
 	});
@@ -110,12 +114,14 @@ exports.lcontestant = function (req, res) {
 			contestantArr[i] = contestant;
 			i++;
 		});
-		res.render('lcontestant', { err: null, contestants: contestantArr });
+		if (req.user.type == "admin") res.render('admin/lcontestant', { user : req.user, err: null, contestants: contestantArr });
+		else res.render('error', { user : req.user });
 	});
 };
 
 exports.ccontestant = function (req, res) {
-	res.render('ccontestant', { err: null });
+	if (req.user.type == "admin") res.render('admin/ccontestant', { user : req.user, err: null });
+	else res.render('error', { user : req.user });
 };
 
 exports.ccontestantPost = function(req, res) {
@@ -131,7 +137,7 @@ exports.ccontestantPost = function(req, res) {
 			return res.redirect('/lcontestant');
 		} else {
 			console.dir(err);
-			return res.render('ccontestant', { err: err });
+			return res.render('admin/ccontestant', { user : req.user, err: err });
 		}        
     });
 };
@@ -140,7 +146,8 @@ exports.rcontestant = function(req, res) {
 	var nameofcontestant = req.query.name;
 	
 	Contestant.findOne({ name: nameofcontestant}, function (err, doc){
-		res.render('rcontestant', { contestant: doc });
+		if (req.user.type == "admin") res.render('admin/rcontestant', { user : req.user, contestant: doc });
+		else res.render('error', { user : req.user });
 	});
 };
 
@@ -148,7 +155,8 @@ exports.ucontestant = function (req, res) {
 	var nameofcontestant = req.query.name;
 
 	Contestant.findOne({ name: nameofcontestant }, function (err, doc){
-		res.render('ucontestant', { contestant: doc });
+		if (req.user.type == "admin") res.render('admin/ucontestant', { user : req.user, contestant: doc });
+		else res.render('error', { user : req.user });
 	});
 };
 
@@ -184,7 +192,8 @@ exports.lcontest = function (req, res) {
 			contestArr[i] = contest;
 			i++;
 		});
-		res.render('lcontest', { err: null, contests: contestArr });
+		if (req.user.type == "admin") res.render('admin/lcontest', { user : req.user, err: null, contests: contestArr });
+		else res.render('error', { user : req.user });
 	});
 };
 
@@ -204,7 +213,8 @@ exports.ccontest = function (req, res) {
 			i++;
 		});
 
-		res.render('ccontest', { err: null, contestants: contestantArr });
+		if (req.user.type == "admin") res.render('admin/ccontest', { user : req.user, err: null, contestants: contestantArr });
+		else res.render('error', { user : req.user });
 	});
 
 };
@@ -224,7 +234,7 @@ exports.ccontestPost = function(req, res) {
 			return res.send({redirect: '/lcontest'});
 		} else {
 			console.dir(err);
-			return res.render('ccontest', { err: err });
+			return res.render('admin/ccontest', { user : req.user, err: err });
 		}        
     });
 };
@@ -233,7 +243,8 @@ exports.rcontest = function(req, res) {
 	var nameofcontest = req.query.name;
 	
 	Contest.findOne({ name: nameofcontest}, function (err, doc){
-		res.render('rcontest', { contest: doc });
+		if (req.user.type == "admin") res.render('admin/rcontest', { user : req.user, contest: doc });
+		else res.render('error', { user : req.user });
 	});
 };
 
@@ -250,7 +261,8 @@ exports.ucontest = function (req, res) {
 				i++;
 			});
 
-			res.render('ucontest', { err: null, contestants: contestantArr, contest: doc });
+			if (req.user.type == "admin") res.render('admin/ucontest', { user : req.user, err: null, contestants: contestantArr, contest: doc });
+			else res.render('error', { user : req.user });
 		});
 
 	});

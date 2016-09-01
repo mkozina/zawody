@@ -1,14 +1,19 @@
+<div class="container">
+
 <h1>Zarządzanie kontami sędziów</h1>
 
 <p><a href="/cref">Utwórz konto dla nowego sędziego</a></p>
 
-<table>
+<table class="table">
 
+<thead>
 	<tr>
 		<th>Nazwisko</th>
 		<th colspan="3"></th>
 	</tr>
+</thead>
 
+<tbody>
 	<% accounts.forEach(function(account) { %>
 	<% if (account.type == "ref") { %>
 	<tr>
@@ -16,25 +21,26 @@
 		<td>
 			<form class="form" action="/rref" method="get">
 				<input type="hidden" name="username" value="<%= account.username %>" />
-				<button type="submit">Pokaż</button>
+				<button type="submit" class="btn btn-link">Pokaż</button>
 			</form>
 		</td>
 		<td>
 			<form class="form" action="/uref" method="get">
 				<input type="hidden" name="username" value="<%= account.username %>" />
-				<button type="submit">Edytuj</button>
+				<button type="submit" class="btn btn-link">Edytuj</button>
 			</form>
 		</td>
 		<td>
 			<form class="form" action="/dref" method="post">
 				<input type="hidden" name="username" value="<%= account.username %>" />
-				<button type="submit">Usuń</button>
+				<button type="submit" class="btn btn-link" onclick="return confirm('Czy napewno chcesz usunąć użytkownika?');return false;">Usuń</button>
 			</form>
 		</td>
 	</tr>
 	<% } %>
 	<% }); %>
+</tbody>
 
 </table>
 
-<p><a href="/admin">Cofnij się</a></p>
+</div>

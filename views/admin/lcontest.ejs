@@ -1,9 +1,12 @@
+<div class="container">
+
 <h1>Zarządzanie zawodami</h1>
 
 <p><a href="/ccontest">Utwórz nowe zawody</a></p>
 
-<table>
+<table class="table">
 
+<thead>
 	<tr>
 		<th>Nazwa</th>
 		<th>Punktacja</th>
@@ -12,7 +15,9 @@
 		<th>Data zawodów</th>
 		<th colspan="5"></th>
 	</tr>
+</thead>
 
+<tbody>
 	<% contests.forEach(function(contest) { %>
 	<tr>
 
@@ -41,37 +46,38 @@
 		<td>
 			<form class="form" action="/rcontest" method="get">
 				<input type="hidden" name="name" value="<%= contest.name %>" />
-				<button type="submit">Pokaż</button>
+				<button type="submit" class="btn btn-link">Pokaż</button>
 			</form>
 		</td>
 		<td>
 			<form class="form" action="/ucontest" method="get">
 				<input type="hidden" name="name" value="<%= contest.name %>" />
-				<button type="submit">Edytuj</button>
+				<button type="submit" class="btn btn-link">Edytuj</button>
 			</form>
 		</td>
 		<td>
 			<form class="form" action="/dcontest" method="post">
 				<input type="hidden" name="name" value="<%= contest.name %>" />
-				<button type="submit">Usuń</button>
+				<button type="submit" class="btn btn-link" onclick="return confirm('Czy napewno chcesz usunąć zawody?');return false;">Usuń</button>
 			</form>
 		</td>
 		<td>
 			<form class="form" action="/lgroup" method="get">
 				<input type="hidden" name="name" value="<%= contest.name %>" />
-				<button type="submit">Grupy</button>
+				<button type="submit" class="btn btn-link">Grupy</button>
 			</form>
 		</td>
 		<td>
 			<form class="form" action="/contestadmin" method="get">
 				<input type="hidden" name="name" value="<%= contest.name %>" />
-				<button type="submit">Rozpocznij</button>
+				<button type="submit" class="btn btn-link">Rozpocznij</button>
 			</form>
 		</td>
 
 	</tr>
 	<% }); %>
+</tbody>
 
 </table>
 
-<p><a href="/admin">Cofnij się</a></p>
+</div>
