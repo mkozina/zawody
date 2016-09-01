@@ -193,6 +193,10 @@ sio.sockets.on('connection', function (socket) {
 		socket.broadcast.emit('score', data);
 	});
 
+	socket.on('stop', function (data) {
+		socket.broadcast.emit('stop', data);
+	});
+
 });
 
 server.listen(port, addresses[0], function () {
