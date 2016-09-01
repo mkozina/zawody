@@ -95,6 +95,8 @@ let routes = require('./routes');
 
 app.get('/', routes.index);
 
+app.get('/about', routes.about);
+
 app.get('/login', routes.login);
 app.post('/login', passport.authenticate('local'), routes.loginPost);
 app.get('/logout', routes.logout);
