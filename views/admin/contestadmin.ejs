@@ -46,6 +46,7 @@
 		<th>Ruch</th>
 	</tr>
 <% groups.forEach(function(group) { %>
+<tr><th><%= group.name %></th><th></th><th></th><th></th><th></th><th></th></tr>
 <% group.reflist.forEach(function(ref) { %>
 	<tr id="<%= group.name %>-<%= ref.username %>">
 		<td class="ref"></td>

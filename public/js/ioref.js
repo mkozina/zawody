@@ -24,6 +24,7 @@ window.addEventListener("load", function(event) {
 
 	socket.on('connect', function (data) {
 		contestStatus.src = "img/bullet_green.png";
+		socket.emit('ref_start');
 	});
 
 	$( "#styp" ).text($( "#typ" ).val());
@@ -103,6 +104,25 @@ window.addEventListener("load", function(event) {
 
 	judge.addEventListener("click", function(event) {
 		socket.emit('score', group+'-'+me+'-'+""+'-'+""+'-'+""+'-'+""+'-'+"");
+	});
+
+	socket.on('score_backup', function (data) {
+		$.each(data, function(index, value) {
+			if(me == value.username) {
+				var str = value.score.split("-");
+				$( "#styp" ).text(str[2]);
+				$( "#sglowa" ).text(str[3]);
+				$( "#skloda" ).text(str[4]);
+				$( "#snogi" ).text(str[5]);
+				$( "#sruch" ).text(str[6]);
+				$( "#typ" ).val(str[2]);
+				alert(str[2]);
+				$( "#glowa" ).val(str[3]);
+				$( "#kloda" ).val(str[4]);
+				$( "#nogi" ).val(str[5]);
+				$( "#ruch" ).val(str[6]);
+			}
+		});
 	});
 
 });

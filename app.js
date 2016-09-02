@@ -178,6 +178,10 @@ sio.sockets.on('connection', function (socket) {
 		exist=0;
 	});
 
+	socket.on('ref_start', function (data) {
+		socket.broadcast.emit('ref_start', data);
+	});
+
 	socket.on('group', function (data) {
 		socket.broadcast.emit('group', data);
 	});
@@ -192,6 +196,10 @@ sio.sockets.on('connection', function (socket) {
 
 	socket.on('score', function (data) {
 		socket.broadcast.emit('score', data);
+	});
+
+	socket.on('score_backup', function (data) {
+		socket.broadcast.emit('score_backup', data);
 	});
 
 	socket.on('stop', function (data) {
