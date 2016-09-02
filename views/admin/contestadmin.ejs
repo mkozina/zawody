@@ -10,12 +10,15 @@
 <table class="table">
 <caption><%= group.name %></caption>
 
+<thead>
 	<tr>
 		<th>Nr</th>
 		<th>Nazwa</th>
 		<th colspan="3"></th>
 	</tr>
+</thead>
 
+<tbody>
 	<% group.reflist.forEach(function(ref) { %>
 	<input type="hidden" name="<%= group.name %>" value="<%= ref.username %>" />
 	<% }); %>
@@ -29,6 +32,7 @@
 		<td><img id="img<%= contestant.no %>" src="img/wrong.png" width="35" /></td>
 	</tr>
 	<% }); %>
+</tbody>
 
 </table>
 <% }); %>
@@ -36,7 +40,10 @@
 <input id="close" type="button" class="btn btn-primary" value="Zakończ">
 
 <table class="table">
+
 <caption id="contestantDisplay"></caption>
+
+<thead>
 	<tr>
 		<th>Sędzia</th>
 		<th>Typ</th>
@@ -45,6 +52,9 @@
 		<th>Nogi</th>
 		<th>Ruch</th>
 	</tr>
+</thead>
+
+<tbody>
 <% groups.forEach(function(group) { %>
 <tr><th><%= group.name %></th><th></th><th></th><th></th><th></th><th></th></tr>
 <% group.reflist.forEach(function(ref) { %>
@@ -58,6 +68,8 @@
 	</tr>
 <% }); %>
 <% }); %>
+</tbody>
+
 </table>
 
 </div>
