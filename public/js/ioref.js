@@ -128,4 +128,8 @@ window.addEventListener("load", function(event) {
 		});
 	});
 
+	socket.on('stop', function (data) {
+		if(judge.disabled === false) err.textContent = data;
+	});
+
 });

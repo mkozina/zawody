@@ -79,7 +79,7 @@ window.addEventListener("load", function(event) {
 		contestantStatus.src = "img/right.png";
 		start.prop("disabled",false);
 		stop.prop("disabled",true);
-		socket.emit('stop', nr);
+		socket.emit('stop', "Proszę wystawić ocenę!");
 	});
 
 	socket.on('score', function (data) {

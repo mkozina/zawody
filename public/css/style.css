@@ -15,3 +15,8 @@ p {
   display: table-cell;
   vertical-align: middle;
 }
+#err {
+  color: #ff0000;
+  font-weight: bold;
+  font-size: 150%;
+}
