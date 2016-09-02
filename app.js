@@ -209,7 +209,6 @@ sio.sockets.on('connection', function (socket) {
 
 	socket.on('db', function (data) {
 		socket.broadcast.emit('db', data);
-		console.log('db: '+data);
 		var str = data.split("-");
 		var newScore = new Score({
 			contest: str[0],

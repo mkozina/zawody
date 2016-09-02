@@ -2,7 +2,7 @@
 
 <div class="container">
 
-<h1><%= contest.name %></h1>
+<h1><img id="contestStatus" src="img/bullet_red.png" width="35" /><%= contest.name %></h1>
 
 <h2>Oceny cząstkowe</h2>
 
@@ -22,7 +22,8 @@
 	</tr>
 </thead>
 
-<tbody>
+<tbody id="<%= group.name %>" >
+<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 <% scores.forEach(function(score) { %>
 <% if (score.group == group.name) { %>
 	<tr>
