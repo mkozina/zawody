@@ -30,6 +30,8 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/zawody');
 
+var Score = require('./models/score');
+
 var express = require('express');
 var session = require('express-session');
 var mongoStore = require('connect-mongo')(session);
@@ -200,6 +202,26 @@ sio.sockets.on('connection', function (socket) {
 
 	socket.on('score_backup', function (data) {
 		socket.broadcast.emit('score_backup', data);
+	});
+
+	socket.on('db', function (data) {
+		socket.broadcast.emit('db', data);
+		console.log('db: '+data);
+		var str = data.split("-");
+		var newScore = new Score({
+			contest: str[0],
+			group: str[1],
+			no: str[2],
+			ref: str[3],
+			typ: str[4],
+			glowa: str[5],
+			kloda: str[6],
+			nogi: str[7],
+			ruch: str[8]
+		});
+		newScore.save(function (err, item) {
+		});
+
 	});
 
 	socket.on('stop', function (data) {

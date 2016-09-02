@@ -1,8 +1,9 @@
 window.addEventListener("load", function(event) {
 
 	var temp;
-	var contest;
+	var contest = document.getElementById("contestname").textContent;
 	var group;
+	var no;
 
 	var contestStatus = document.getElementById("contestStatus");
 	var groupname = document.getElementById("groupname");
@@ -65,6 +66,7 @@ window.addEventListener("load", function(event) {
 
 	socket.on('contestant', function (data) {
 		contestantno.textContent = data;
+		no = data;
 	});
 
 	socket.on('refs', function (data) {
@@ -104,6 +106,8 @@ window.addEventListener("load", function(event) {
 
 	judge.addEventListener("click", function(event) {
 		socket.emit('score', group+'-'+me+'-'+""+'-'+""+'-'+""+'-'+""+'-'+"");
+		socket.emit('db', contest+'-'+group+'-'+no+'-'+me+'-'+typ.value+'-'+glowa.value+'-'+kloda.value+'-'+nogi.value+'-'+ruch.value);
+		judge.disabled = true;
 	});
 
 	socket.on('score_backup', function (data) {
@@ -116,7 +120,6 @@ window.addEventListener("load", function(event) {
 				$( "#snogi" ).text(str[5]);
 				$( "#sruch" ).text(str[6]);
 				$( "#typ" ).val(str[2]);
-				alert(str[2]);
 				$( "#glowa" ).val(str[3]);
 				$( "#kloda" ).val(str[4]);
 				$( "#nogi" ).val(str[5]);
