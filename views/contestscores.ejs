@@ -2,8 +2,66 @@
 
 <div class="container">
 
+<h1><%= contest.name %></h1>
+
+<h2>Oceny cząstkowe</h2>
+
+<% groups.forEach(function(group) { %>
 <table class="table">
+<caption><%= group.name %></caption>
+
+<thead>
+	<tr>
+		<th>Nr</th>
+		<th>Sędzia</th>
+		<th>Typ</th>
+		<th>Głowa i szyja</th>
+		<th>Kłoda</th>
+		<th>Nogi</th>
+		<th>Ruch</th>
+	</tr>
+</thead>
+
+<tbody>
+<% scores.forEach(function(score) { %>
+<% if (score.group == group.name) { %>
+	<tr>
+		<td><%= score.no %></td>
+		<td><%= score.ref %></td>
+		<td><%= score.typ %></td>
+		<td><%= score.glowa %></td>
+		<td><%= score.kloda %></td>
+		<td><%= score.nogi %></td>
+		<td><%= score.ruch %></td>
+	</tr>
+<% } %>
+<% }); %>
+</tbody>
 
 </table>
+<% }); %>
+
+<h2>Oceny końcowe</h2>
+
+<% groups.forEach(function(group) { %>
+<table class="table">
+<caption><%= group.name %></caption>
+
+<thead>
+	<tr>
+		<th>Nr</th>
+		<th>Typ</th>
+		<th>Głowa i szyja</th>
+		<th>Kłoda</th>
+		<th>Nogi</th>
+		<th>Ruch</th>
+	</tr>
+</thead>
+
+<tbody>
+</tbody>
+
+</table>
+<% }); %>
 
 </div>
