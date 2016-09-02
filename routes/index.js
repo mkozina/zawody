@@ -10,6 +10,28 @@ exports.index = function (req, res) {
 	res.render('index', { user : req.user });
 };
 
+exports.scores = function (req, res) {
+	res.render('scores', { user : req.user, contests: app.rooms });
+};
+
+exports.contestscores = function (req, res) {
+	var nameofcontest = req.query.name;
+	
+	Contest.findOne({ name: nameofcontest}, function (err, doc){
+		Group.find({ nameofcontest: nameofcontest}, function(err, groups) {
+			var groupArr = [];
+			var i = 0;
+			groups.forEach(function(group) {
+				groupArr[i] = group;
+				i++;
+			});
+
+			res.render('contestscores', { user : req.user, contest: doc, groups: groupArr });
+		});
+
+	});
+};
+
 exports.contact = function (req, res) {
 	res.render('contact', { user : req.user });
 };
