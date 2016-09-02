@@ -1,4 +1,5 @@
 @alertcolor: #FF0000;
+@successcolor: #00FF00;
 
 html, body {
    height: 100%;
@@ -6,6 +7,11 @@ html, body {
 
 p {
 	font-size: 1.5em;
+}
+
+.importantMsg {
+	font-weight: bold;
+	font-size: 150%;
 }
 
 .container {
@@ -22,6 +28,10 @@ p {
 
 #err {
 	color: @alertcolor;
-	font-weight: bold;
-	font-size: 150%;
+	.importantMsg
+}
+
+#fin {
+	color: @successcolor;
+	.importantMsg
 }

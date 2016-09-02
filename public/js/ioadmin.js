@@ -106,4 +106,12 @@ window.addEventListener("load", function(event) {
 		socket.emit('score_backup', glob_refarr)
 	});
 
+	$('#close').click(function(){
+		socket.emit('finish', "Zawody zostały zakończone!");
+		$( this ).prop("disabled",true);
+		start.prop("disabled",true);
+		stop.prop("disabled",true);
+		alert("koniec");
+	});
+
 });

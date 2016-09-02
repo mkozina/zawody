@@ -230,6 +230,10 @@ sio.sockets.on('connection', function (socket) {
 		socket.broadcast.emit('stop', data);
 	});
 
+	socket.on('finish', function (data) {
+		socket.broadcast.emit('finish', data);
+	});
+
 });
 
 server.listen(port, addresses[0], function () {

@@ -11,6 +11,7 @@ window.addEventListener("load", function(event) {
 	var myname = document.getElementById("myname");
 	var me = myname.value;
 	var err = document.getElementById("err");
+	var fin = document.getElementById("fin");
 	
 	var typ = document.getElementById("typ");
 	var glowa = document.getElementById("glowa");
@@ -130,6 +131,11 @@ window.addEventListener("load", function(event) {
 
 	socket.on('stop', function (data) {
 		if(judge.disabled === false) err.textContent = data;
+	});
+
+	socket.on('finish', function (data) {
+		fin.textContent = data;
+		judge.disabled = true;
 	});
 
 });

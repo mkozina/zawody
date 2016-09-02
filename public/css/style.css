@@ -5,6 +5,10 @@ body {
 p {
   font-size: 1.5em;
 }
+.importantMsg {
+  font-weight: bold;
+  font-size: 150%;
+}
 .container {
   display: table;
   width: 75%;
@@ -17,6 +21,11 @@ p {
 }
 #err {
   color: #ff0000;
+  font-weight: bold;
+  font-size: 150%;
+}
+#fin {
+  color: #00ff00;
   font-weight: bold;
   font-size: 150%;
 }
