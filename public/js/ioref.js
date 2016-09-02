@@ -109,6 +109,7 @@ window.addEventListener("load", function(event) {
 		socket.emit('score', group+'-'+me+'-'+""+'-'+""+'-'+""+'-'+""+'-'+"");
 		socket.emit('db', contest+'-'+group+'-'+no+'-'+me+'-'+typ.value+'-'+glowa.value+'-'+kloda.value+'-'+nogi.value+'-'+ruch.value);
 		judge.disabled = true;
+		err.textContent = "";
 	});
 
 	socket.on('score_backup', function (data) {
