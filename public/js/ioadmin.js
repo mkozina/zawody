@@ -111,7 +111,7 @@ window.addEventListener("load", function(event) {
 		$( this ).prop("disabled",true);
 		start.prop("disabled",true);
 		stop.prop("disabled",true);
-		alert("koniec");
+		socket.emit('calc', contest);
 	});
 
 });

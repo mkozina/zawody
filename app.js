@@ -30,7 +30,9 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/zawody');
 
+var Group = require('./models/group');
 var Score = require('./models/score');
+var FinalScore = require('./models/finalscore');
 
 var express = require('express');
 var session = require('express-session');
@@ -232,6 +234,52 @@ sio.sockets.on('connection', function (socket) {
 
 	socket.on('finish', function (data) {
 		socket.broadcast.emit('finish', data);
+	});
+
+	socket.on('calc', function (data) {
+
+			Group.find({ nameofcontest: data}, function(err, groups) {
+
+				groups.forEach(function(group) {
+
+					group.grouplist.forEach(function(grouplist) {
+
+							var groupname = group.name;
+							var contestantno = grouplist.no;
+							var contestantname = grouplist.name;
+
+						Score.find({ contest: data, group: group.name, no: grouplist.no }, function(err, scores) {
+							var finalscore = 0;
+							var no = 0;
+							scores.forEach(function(score) {
+								no++;
+								finalscore = finalscore +
+									parseInt(score.typ,10) + 
+									parseInt(score.glowa,10) + 
+									parseInt(score.kloda,10) + 
+									parseInt(score.nogi,10) + 
+									parseInt(score.ruch,10);
+							});
+							finalscore = finalscore / no;
+
+							var newFinalScore = new FinalScore({
+								contest: data,
+								group: groupname,
+								no: contestantno,
+								name: contestantname,
+								score: finalscore
+							});
+							newFinalScore.save(function (err, item) {
+							});
+
+						});
+
+					});
+
+				});
+			});
+
+		socket.broadcast.emit('calc', data);
 	});
 
 });
