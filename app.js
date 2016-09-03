@@ -241,7 +241,7 @@ sio.sockets.on('connection', function (socket) {
 
 		async.series([
 
-		function () {
+		function (done) {
 
 			Group.find({ nameofcontest: data}, function(err, groups) {
 
@@ -295,13 +295,19 @@ sio.sockets.on('connection', function (socket) {
 					});
 
 				});
+
+				done(err);
+
 			});
 
 		},
 
-		function () {
-		//
-				FinalScore.find({ contest: data, group: group}, function(err, finalscores) {
+		function (done) {
+
+			Group.find({ nameofcontest: data}, function(err, groups) {
+				groups.forEach(function(group) {
+
+				FinalScore.find({ contest: data, group: group.name}, function(err, finalscores) {
 					var first_score = 0;
 					var first_no = 0;
 					var second_score = 0;
@@ -331,14 +337,16 @@ sio.sockets.on('connection', function (socket) {
 						}
 					});
 				});
-		//
+
+				});
+				done(err);
+			});
 		}],
 
     function (err) {
         if (err) {
             console.log(err);
         }
-        process.exit(0);
     }
 
 		);
