@@ -251,6 +251,8 @@ sio.sockets.on('connection', function (socket) {
 						Score.find({ contest: data, group: group.name, no: grouplist.no }, function(err, scores) {
 							var finalscore = 0;
 							var no = 0;
+							var typ = 0;
+							var ruch = 0;
 							scores.forEach(function(score) {
 								no++;
 								finalscore = finalscore +
@@ -259,9 +261,15 @@ sio.sockets.on('connection', function (socket) {
 									parseInt(score.kloda,10) + 
 									parseInt(score.nogi,10) + 
 									parseInt(score.ruch,10);
+								typ = typ + parseInt(score.typ,10);
+								ruch = ruch + parseInt(score.ruch,10);
 							});
 							finalscore = finalscore / no;
 							finalscore = finalscore.toFixed(0);
+							typ = typ / no;
+							typ = typ.toFixed(0);
+							ruch = ruch / no;
+							ruch = ruch.toFixed(0);
 
 							socket.broadcast.emit('calc', data+'-'+groupname+'-'+contestantno+'-'+contestantname+'-'+finalscore);
 
@@ -270,7 +278,9 @@ sio.sockets.on('connection', function (socket) {
 								group: groupname,
 								no: contestantno,
 								name: contestantname,
-								score: finalscore
+								score: finalscore,
+								typ: typ,
+								ruch: ruch
 							});
 							newFinalScore.save(function (err, item) {
 							});
