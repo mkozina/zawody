@@ -22,7 +22,7 @@
 	</tr>
 </thead>
 
-<tbody id="<%= group.name %>" >
+<tbody id="partial-<%= group.name %>" >
 <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 <% scores.forEach(function(score) { %>
 <% if (score.group == group.name) { %>
@@ -51,15 +51,22 @@
 <thead>
 	<tr>
 		<th>Nr</th>
-		<th>Typ</th>
-		<th>Głowa i szyja</th>
-		<th>Kłoda</th>
-		<th>Nogi</th>
-		<th>Ruch</th>
+		<th>Nazwa</th>
+		<th>Ocena</th>
 	</tr>
 </thead>
 
-<tbody>
+<tbody id="final-<%= group.name %>">
+<tr><td></td><td></td><td></td></tr>
+<% finalscores.forEach(function(finalscore) { %>
+<% if (finalscore.group == group.name) { %>
+	<tr>
+		<td><%= finalscore.no %></td>
+		<td><%= finalscore.name %></td>
+		<td><%= finalscore.score %></td>
+	</tr>
+<% } %>
+<% }); %>
 </tbody>
 
 </table>

@@ -5,6 +5,7 @@ var Contestant = require('../models/contestant');
 var Contest = require('../models/contest');
 var Group = require('../models/group');
 var Score = require('../models/score');
+var FinalScore = require('../models/finalscore');
 var app = require('../app');
 
 exports.index = function (req, res) {
@@ -35,7 +36,18 @@ exports.contestscores = function (req, res) {
 				j++;
 			});
 
-			res.render('contestscores', { user : req.user, contest: doc, groups: groupArr, scores: scoreArr });
+		FinalScore.find({ contest: nameofcontest}, function(err, finalscores) {
+			var finalscoreArr = [];
+			var k = 0;
+			finalscores.forEach(function(finalscore) {
+				finalscoreArr[k] = finalscore;
+				k++;
+			});
+
+			res.render('contestscores', { user : req.user, contest: doc, groups: groupArr, scores: scoreArr, finalscores: finalscoreArr });
+
+		});
+
 		});
 
 		});
