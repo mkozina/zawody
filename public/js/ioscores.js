@@ -23,7 +23,20 @@ window.addEventListener("load", function(event) {
     newHTML.push('<td>' + str[8] + '</td>');
 		newHTML.push('</tr>');
 
-		$( '#'+str[1]+' > tr:last' ).after(newHTML.join(""));
+		$( '#partial-'+str[1]+' > tr:last' ).after(newHTML.join(""));
+		newHTML = [];
+	});
+
+	socket.on('calc', function (data) {
+		var str = data.split("-");
+
+		newHTML.push('<tr>');
+    newHTML.push('<td>' + str[2] + '</td>');
+    newHTML.push('<td>' + str[3] + '</td>');
+    newHTML.push('<td>' + str[4] + '</td>');
+		newHTML.push('</tr>');
+
+		$( '#final-'+str[1]+' > tr:last' ).after(newHTML.join(""));
 		newHTML = [];
 	});
 

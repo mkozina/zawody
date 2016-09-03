@@ -261,6 +261,9 @@ sio.sockets.on('connection', function (socket) {
 									parseInt(score.ruch,10);
 							});
 							finalscore = finalscore / no;
+							finalscore = finalscore.toFixed(0);
+
+							socket.broadcast.emit('calc', data+'-'+groupname+'-'+contestantno+'-'+contestantname+'-'+finalscore);
 
 							var newFinalScore = new FinalScore({
 								contest: data,
@@ -279,7 +282,6 @@ sio.sockets.on('connection', function (socket) {
 				});
 			});
 
-		socket.broadcast.emit('calc', data);
 	});
 
 });
