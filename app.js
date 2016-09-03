@@ -28,6 +28,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 
 var mongoose = require('mongoose');
+var async = require('async');
 mongoose.connect('mongodb://localhost/zawody');
 
 var Group = require('./models/group');
@@ -238,6 +239,10 @@ sio.sockets.on('connection', function (socket) {
 
 	socket.on('calc', function (data) {
 
+		async.series([
+
+		function () {
+
 			Group.find({ nameofcontest: data}, function(err, groups) {
 
 				groups.forEach(function(group) {
@@ -292,7 +297,55 @@ sio.sockets.on('connection', function (socket) {
 				});
 			});
 
+		},
+
+		function () {
+		//
+				FinalScore.find({ contest: data, group: group}, function(err, finalscores) {
+					var first_score = 0;
+					var first_no = 0;
+					var second_score = 0;
+					var second_no = 0;
+					var third_score = 0;
+					var third_no = 0;
+					finalscores.forEach(function(finalscore) {
+						var actual_score = parseInt(finalscore.score,10);
+						var actual_no = parseInt(finalscore.no,10);
+						if( actual_score > first_score) {
+							third_score = second_score;
+							third_no = second_no;
+							second_score = first_score;
+							second_no = first_no;
+							first_score = actual_score;
+							first_no = actual_no;
+						}
+						else if(actual_score < first_score && actual_score > second_score) {
+							third_score = second_score;
+							third_no = second_no;
+							second_score = actual_score;
+							second_no = actual_no;
+						}
+						else if(actual_score < second_score && actual_score > third_score) {
+							third_score = actual_score;
+							third_no = actual_no;
+						}
+					});
+				});
+		//
+		}],
+
+    function (err) {
+        if (err) {
+            console.log(err);
+        }
+        process.exit(0);
+    }
+
+		);
+
 	});
+
+
 
 });
 
