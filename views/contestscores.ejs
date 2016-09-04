@@ -53,6 +53,7 @@
 		<th>Nr</th>
 		<th>Nazwa</th>
 		<th>Ocena</th>
+		<th>Miejsce w rankingu</th>
 	</tr>
 </thead>
 
@@ -64,6 +65,7 @@
 		<td><%= finalscore.no %></td>
 		<td><%= finalscore.name %></td>
 		<td><%= finalscore.score %></td>
+		<td id="<%= finalscore.no %>"><%= finalscore.rank %></td>
 	</tr>
 <% } %>
 <% }); %>

@@ -34,10 +34,19 @@ window.addEventListener("load", function(event) {
     newHTML.push('<td>' + str[2] + '</td>');
     newHTML.push('<td>' + str[3] + '</td>');
     newHTML.push('<td>' + str[4] + '</td>');
+    newHTML.push('<td id="' + str[2] + '"></td>');
 		newHTML.push('</tr>');
 
 		$( '#final-'+str[1]+' > tr:last' ).after(newHTML.join(""));
 		newHTML = [];
+	});
+
+	socket.on('ranking', function (data) {
+		$.each(data, function(index, value) {
+			newHTML.push(value.rank);
+			$( '#final-'+value.group+' > tr > #'+value.no ).after(newHTML.join(""));
+			newHTML = [];
+		});
 	});
 
 });

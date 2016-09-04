@@ -285,7 +285,9 @@ sio.sockets.on('connection', function (socket) {
 								name: contestantname,
 								score: finalscore,
 								typ: typ,
-								ruch: ruch
+								ruch: ruch,
+								rank: 0,
+								remis: 0
 							});
 							newFinalScore.save(function (err, item) {
 							});
@@ -321,16 +323,48 @@ sio.sockets.on('connection', function (socket) {
 							var r_len = ranking.length;
 							for (var j = 0; j < r_len; j++) {
 								var score = parseInt(ranking[j].score,10);
-								if( actual_score >= score ) {
+								var typ = parseInt(ranking[j].typ,10);
+								var ruch = parseInt(ranking[j].ruch,10);
+								if(
+									(actual_score > score) ||
+									((actual_score == score) && (actual_typ > typ)) ||
+									((actual_score == score) && (actual_typ == typ) && (actual_ruch > ruch))
+								) {
 									ranking.splice(j, 0, finalscore);
+									break;
 								}
-								else if( (j+1) == ranking.length ) {
+								else if( (actual_score == score) && (actual_typ == typ) && (actual_ruch == ruch) ) {
+									ranking[j].remis = "R";
+									finalscore.remis = "R";
+									ranking.splice(j, 0, finalscore);
+									break;
+								}
+								else if( (j+1) == r_len ) {
 									ranking.push(finalscore);
 								}
 							}
 						}
 					});
-					socket.broadcast.emit('ranking', data);
+
+					var prev_remis = 0;
+					var counter = 0;
+					ranking.forEach(function(item, index) {
+						if( !(prev_remis == "R" && item.remis == "R") ) counter++;
+						item.rank = counter;
+						FinalScore.findOneAndUpdate(
+							{ no: item.no },
+							{ $set: { rank: counter, remis: item.remis } },
+							{new: true},
+							function(err, doc){
+    						if(err){
+        					console.log("Something wrong when updating data!");
+    						}
+					    	console.log(doc);
+						});
+						prev_remis = item.remis;
+					});
+
+					socket.broadcast.emit('ranking', ranking);
 				});
 
 				});

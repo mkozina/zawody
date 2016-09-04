@@ -8,7 +8,9 @@ var FinalScore = new Schema({
 	name: String,
 	score: String,
 	typ: String,
-	ruch: String
+	ruch: String,
+	rank: String,
+	remis: String
 });
 
 module.exports = mongoose.model('FinalScore', FinalScore);
