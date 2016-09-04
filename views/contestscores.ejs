@@ -65,7 +65,15 @@
 		<td><%= finalscore.no %></td>
 		<td><%= finalscore.name %></td>
 		<td><%= finalscore.score %></td>
-		<td id="<%= finalscore.no %>"><%= finalscore.rank %></td>
+		<td id="<%= finalscore.no %>"><%= finalscore.rank %>
+		<% if (finalscore.rank == 1) { %>
+		<img src="/img/trophy-gold-animated-gif-4.gif" height="20" width="23" alt="gold" />
+		<% } else if (finalscore.rank == 2) {  %>
+		<img src="/img/trophy-silver-animated-gif-3.gif" height="20" width="23" alt="silver" />
+		<% } else if (finalscore.rank == 3) {  %>
+		<img src="/img/trophy-bronze-animated-gif-3.gif" height="20" width="23" alt="bronze" />
+		<% } %>
+		</td>
 	</tr>
 <% } %>
 <% }); %>

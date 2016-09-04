@@ -357,7 +357,7 @@ sio.sockets.on('connection', function (socket) {
 							{new: true},
 							function(err, doc){
     						if(err){
-        					console.log("Something wrong when updating data!");
+        					console.log(err);
     						}
 					    	console.log(doc);
 						});

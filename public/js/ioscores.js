@@ -44,7 +44,10 @@ window.addEventListener("load", function(event) {
 	socket.on('ranking', function (data) {
 		$.each(data, function(index, value) {
 			newHTML.push(value.rank);
-			$( '#final-'+value.group+' > tr > #'+value.no ).after(newHTML.join(""));
+			if(value.rank == 1) newHTML.push('<img class="center-block" src="/img/trophy-gold-animated-gif-4.gif" height="20" width="23" alt="gold" />');
+			else if(value.rank == 2) newHTML.push('<img class="center-block" src="/img/trophy-silver-animated-gif-3.gif" height="20" width="23" alt="silver" />');
+			else if(value.rank == 3) newHTML.push('<img class="center-block" src="/img/trophy-bronze-animated-gif-3.gif" height="20" width="23" alt="bronze" />');
+			$( '#final-'+value.group+' > tr > #'+value.no ).append(newHTML.join(""));
 			newHTML = [];
 		});
 	});
