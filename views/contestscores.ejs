@@ -1,3 +1,32 @@
+<script type="text/javascript" src="js/dist/jspdf.debug.js"></script>
+<script type="text/javascript" src="js/FS/FileSaver.js"></script>
+<script type="text/javascript" src="js/dist/jspdf.min.js"></script>
+<script type="text/javascript" src="js/dist/jspdf.plugin.autotable.js"></script>
+
+<script type="text/javascript">
+function demoTwoPageDocument() {
+
+	var doc = new jsPDF('p', 'pt');
+
+	doc.setFontSize(20);
+	doc.text(40, 40, 'Wyniki zawodów <%= contest.name %>');
+	doc.setFontSize(16);
+	doc.text(40, 100, 'Grupa: Klacze');
+
+	var res = doc.autoTableHtmlToJson(document.getElementById("<%= contest.name %>-final-Klacze"));
+	doc.autoTable(res.columns, res.data, {startY: 120});
+
+	doc.setFontSize(16);
+	doc.text(40, doc.autoTableEndPosY()+60, 'Grupa: Ogiery');
+
+	res = doc.autoTableHtmlToJson(document.getElementById("<%= contest.name %>-final-Ogiery"));
+	doc.autoTable(res.columns, res.data, {startY: doc.autoTableEndPosY()+80});
+
+	doc.save('<%= contest.name %>.pdf');
+
+}
+</script>
+
 <script src="js/ioscores.js"></script>
 
 <div class="container">
@@ -7,7 +36,7 @@
 <h2>Oceny cząstkowe</h2>
 
 <% groups.forEach(function(group) { %>
-<table class="table">
+<table class="table" id="<%= contest.name %>-partial-<%= group.name %>">
 <caption><%= group.name %></caption>
 
 <thead>
@@ -45,7 +74,7 @@
 <h2>Oceny końcowe</h2>
 
 <% groups.forEach(function(group) { %>
-<table class="table">
+<table class="table" id="<%= contest.name %>-final-<%= group.name %>">
 <caption><%= group.name %></caption>
 
 <thead>
@@ -81,5 +110,7 @@
 
 </table>
 <% }); %>
+
+<a href="javascript:demoTwoPageDocument()" class="button">Pobierz plik PDF</a>
 
 </div>
